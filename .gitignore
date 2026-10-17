@@ -1,0 +1,96 @@
+# =============================================================================
+# Embedded Systems Lab - Kapsamlı .gitignore (11 Kart & Tüm Toolchain'ler)
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# 1. Derleme Çıktıları ve İkili (Binary / Firmware) Dosyalar
+# -----------------------------------------------------------------------------
+build/
+Build/
+Debug/
+Release/
+out/
+bin/
+obj/
+
+*.o
+*.d
+*.a
+*.so
+*.obj
+*.elf
+*.bin
+*.hex
+*.uf2
+*.eep
+*.lss
+*.map
+*.sym
+*.out
+*.srec
+
+# -----------------------------------------------------------------------------
+# 2. Arduino CLI, PlatformIO, ESP-IDF ve RPi Pico SDK
+# -----------------------------------------------------------------------------
+.pio/
+.arduino/
+managed_components/
+sdkconfig.old
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+compile_commands.json
+.ninja_deps
+.ninja_log
+build.ninja
+
+# -----------------------------------------------------------------------------
+# 3. STM32CubeIDE & TI Code Composer Studio (CCS)
+# -----------------------------------------------------------------------------
+.settings/
+.launches/
+*.launch
+*.pp
+*.mk
+targetConfigs/
+
+# -----------------------------------------------------------------------------
+# 4. Tang Nano 9K FPGA (Gowin EDA & Sentez Çıktıları)
+# -----------------------------------------------------------------------------
+impl/
+*.fs
+*.vg
+*.posp
+*.Place
+*.Route
+*.rpt.html
+*.rpt.txt
+*.tr.html
+*.vcd
+
+# -----------------------------------------------------------------------------
+# 5. Raspberry Pi Zero W (Python, Sanal Ortam ve Veritabanı Çıktıları)
+# -----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+*.sqlite3
+*.db
+*.log
+
+# -----------------------------------------------------------------------------
+# 6. VS Code ve İşletim Sistemi (OS) Geçici Dosyaları
+# -----------------------------------------------------------------------------
+.vscode/
+
+.DS_Store
+Thumbs.db
+Desktop.ini
+*~
+*.swp
+*.bak
+
