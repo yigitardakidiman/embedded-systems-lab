@@ -132,3 +132,4 @@ arduino-cli upload -b "STMicroelectronics:stm32:Nucleo_144:pnum=NUCLEO_U575ZI_Q,
 | Periyodik LED Blink (`D2`) | `D3` Kablo GND'de (LED Açık) | `D3` Kablo Boşta (LED Kapalı) |
 | :---: | :---: | :---: |
 | ![LED Blink](./media/blink.JPEG) | ![Buton Basılı](./media/button_press.JPEG) | ![Buton Serbest](./media/button_release.JPEG) |
+
