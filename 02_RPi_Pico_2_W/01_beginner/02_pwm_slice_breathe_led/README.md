@@ -139,7 +139,7 @@ arduino-cli compile -u -p COM6 --fqbn rp2040:rp2040:rpipico2w 02_RPi_Pico_2_W/01
 
 ## 📸 Uygulama Görselleri ve Videoları
 
-| Aşama 1: Tek LED Nefes Alma (`breath.mp4`) | Aşama 2: Çift LED Sırayla Nefes Alma (`breath2.mp4`) |
+| Aşama 1: Tek LED Nefes Alma | Aşama 2: Çift LED Sırayla Nefes Alma |
 | :---: | :---: |
-| <video src="media/breath.mp4" width="380" controls></video> | <video src="media/breath2.mp4" width="380" controls></video> |
+| [🎬 **breath.mp4 Videosunu İzle (Tıklayınız)**](media/breath.mp4) | [🎬 **breath2.mp4 Videosunu İzle (Tıklayınız)**](media/breath2.mp4) |
 | *1. LED'in donanımsal PWM ile tek başına nefes alma döngüsü* | *1. ve 2. LED'lerin sırayla ve pürüzsüzce nefes alıp vermesi* |
