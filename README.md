@@ -18,7 +18,7 @@ Her kartta önce `P1 (Blink & Buton)` ile derleyici/yükleyici doğrulaması yap
 | **02** | **Raspberry Pi Pico 2 W** | RP2350 (Dual Cortex-M33 / RISC-V + PIO) | [✅](02_RPi_Pico_2_W/01_beginner/01_led_blink_cyw43_and_gpio/) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **03** | **CRIUS ALL IN ONE PRO** | 8-Bit AVR ATmega2560 (Flight Controller) | [✅](03_CRIUS_ATmega2560/01_beginner/01_avr_register_blink_timer1/) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **04** | **TI MSP-EXP430G2** | 16-Bit Ultra-Low-Power RISC (512B RAM) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **05** | **TI MSP430F5529 LP** | 16-Bit RISC (25 MHz, DMA, USB, 12-Bit ADC) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **05** | **TI MSP430F5529 LP** | 16-Bit RISC (25 MHz, DMA, USB, 12-Bit ADC) | [✅](05_TI_MSP430F5529_LP/01_beginner/01_ucs_25mhz_dual_port_blink/) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **06** | **TI EK-TM4C123GXL** | 32-Bit ARM Cortex-M4F (80 MHz, FPU, NVIC) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **07** | **ST NUCLEO-U575ZI-Q** | 32-Bit ARM Cortex-M33 (ULP, SMPS, TrustZone) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **08** | **ST P-NUCLEO-WB55** | Dual ARM Cortex-M4 + Cortex-M0+ (BLE 5.0) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
