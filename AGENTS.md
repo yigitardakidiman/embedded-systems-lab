@@ -62,5 +62,17 @@ Bir proje kodlanıp, devresi test edilip başarıyla tamamlandığında Agent a�
    - Bölüm 2'deki İlerleme Matrisinde ilgili kartın projesini `✅` yapar.
    - İlgili kartın altındaki proje başlığını `**[TAMAMLANDI ✅]**` olarak günceller.
 
+---
+
+## 🧭 6. İlerleme Sırası Kuralı (Yatay / Kademeli İlerleme Modeli)
+
+Kullanıcı aksi yönde özel bir talimat vermediği sürece müfredat **yatay (horizontal)** ilerleme sırasını izleyecektir:
+
+1. **Önce tüm kartların `P1` projeleri tamamlanacaktır:** Geliştirme kartlarının toolchain doğrulaması ve temel dijital G/Ç adımı bitirilir.
+2. **Ardından tüm kartların `P2` projeleri tamamlanacaktır:** PWM / analog çıkış / donanım nefes alma adımları sırayla işlenir.
+3. Bu sıra **`P3`**, **`P4`**... şeklinde kademeli olarak devam edecektir.
+
+> **Agent Davranışı:** Bir proje bittiğinde Agent, sıradaki proje önerisini daima bu yatay kurala göre sunar. Kullanıcı aksini talep etmediği sürece dikey olarak aynı kartın sonraki seviyesine geçiş önermez.
+
 
 
