@@ -119,3 +119,4 @@ arduino-cli upload -b "STMicroelectronics:stm32:Nucleo_144:pnum=NUCLEO_H723ZG,up
 | Aşama 1: Periyodik Blink | Aşama 2: Buton Basılı (`LED ON`) | Aşama 2: Buton Bırakıldı (`LED OFF`) |
 | :---: | :---: | :---: |
 | ![Blink Testi](./media/blink.JPEG) | ![Buton Basılı](./media/button_press.JPEG) | ![Buton Bırakıldı](./media/button_release.JPEG) |
+
