@@ -1,2 +1,1 @@
-#include "main.cpp"
-
+// Empty file for arduino-cli sketch discovery
