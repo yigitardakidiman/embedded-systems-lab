@@ -50,4 +50,17 @@ Açılan her proje klasörünün kendi içinde mutlaka şu standart yapıyı kor
 * **`src/`:** Projeye ait kemik kaynak kodları barındırır (`main.cpp`, `src.ino`).
 * **`media/`:** Kullanıcının devre çalıştığında ekleyeceği fotoğraf (`.JPEG`, `.PNG`) ve hareketli görselleri (`.GIF`) barındırır.
 
+---
+
+## 📊 5. Proje Tamamlanma ve Portföy Güncelleme Kuralı
+
+Bir proje kodlanıp, devresi test edilip başarıyla tamamlandığında Agent aşağıdaki iki dokümantasyon dosyasını ZORUNLU olarak güncelleyecektir:
+
+1. **Ana Vitrin [`README.md`](file:///c:/Users/PC/Desktop/Kıdıman/embedded-systems-lab/README.md):** 
+   - İlerleme matrisindeki ilgili kutucuğu `[✅](proje_yolu/)` olarak işaretleyip proje klasörüne link verir.
+2. **Rehber Doküman [`00_docs/proje_semasi_ve_132_proje_rehberi.md`](file:///c:/Users/PC/Desktop/Kıdıman/embedded-systems-lab/00_docs/proje_semasi_ve_132_proje_rehberi.md):**
+   - Bölüm 2'deki İlerleme Matrisinde ilgili kartın projesini `✅` yapar.
+   - İlgili kartın altındaki proje başlığını `**[TAMAMLANDI ✅]**` olarak günceller.
+
+
 
