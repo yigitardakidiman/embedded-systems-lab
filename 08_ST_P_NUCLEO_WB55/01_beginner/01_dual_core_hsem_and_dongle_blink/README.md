@@ -142,3 +142,4 @@ arduino-cli upload -b "STMicroelectronics:stm32:Nucleo_64:pnum=P_NUCLEO_WB55RG,u
 | Periyodik Blink (`D2`) | `SW1` Basılı (Mavi + Harici LED) | `SW2` Basılı (Yeşil LED) | `SW3` Basılı (Kırmızı LED) |
 | :---: | :---: | :---: | :---: |
 | ![Blink](./media/blink.JPEG) | ![SW1 Basılı](./media/sw1.JPEG) | ![SW2 Basılı](./media/sw2.JPEG) | ![SW3 Basılı](./media/sw3.JPEG) |
+

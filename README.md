@@ -22,7 +22,7 @@ Her kartta önce `P1 (Blink & Buton)` ile derleyici/yükleyici doğrulaması yap
 | **06** | **TI EK-TM4C123GXL** | 32-Bit ARM Cortex-M4F (80 MHz, FPU, NVIC) | [✅](06_TI_TM4C123GXL_TivaC/01_beginner/01_rgb_blink_bitbanding_pf0_unlock/) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **07** | **ST NUCLEO-U575ZI-Q** | 32-Bit ARM Cortex-M33 (ULP, SMPS, TrustZone) | [✅](07_ST_NUCLEO_U575ZI_Q/01_beginner/01_smps_power_and_bsrr_blink/) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **08** | **ST P-NUCLEO-WB55** | Dual ARM Cortex-M4 + Cortex-M0+ (BLE 5.0) | [✅](08_ST_P_NUCLEO_WB55/01_beginner/01_dual_core_hsem_and_dongle_blink/) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **09** | **ST NUCLEO-H723ZG** | 32-Bit ARM Cortex-M7 (550 MHz, Double FPU, DSP) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **09** | **ST NUCLEO-H723ZG** | 32-Bit ARM Cortex-M7 (550 MHz, Double FPU, DSP) | [✅](09_ST_NUCLEO_H723ZG/01_beginner/01_m7_550mhz_dcache_clean_blink/) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **10** | **Raspberry Pi Zero W** | ARM11 BCM2835 (1 GHz, Embedded Linux) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **11** | **Tang Nano 9K FPGA** | Gowin GW1NR-9 FPGA (8640 LUT, Verilog) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 
