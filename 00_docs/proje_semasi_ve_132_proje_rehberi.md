@@ -94,20 +94,31 @@ Her kartta önce `P1 (Blink)` tamamlanacak, ardından yatay veya aile bazlı ola
 
 ## 🛠️ 4. Kart Bazlı 132 Proje Rehberi
 
+> [!TIP]
+> ### 💡 Pedagojik İlerleme İlkesi (Adım Adım Öğrenme Modeli)
+> Gömülü sistemler öğreniminde kavram karmaşasını ve donanım kargaşasını önlemek için her geliştirme kartının **Başlangıç Seviyesi (01_beginner)** 4 temel ve tekil basamağa ayrılmıştır:
+> 1. **P1 — Dijital Giriş/Çıkış (GPIO & Buton):** LED yakıp söndürme, pull-up direnci ve buton okuma.
+> 2. **P2 — Analog Çıkış / PWM (LED Karartma - Fade/Breathe):** Donanımsal PWM modülü ile tek bir LED'in parlaklığını yumuşakça kısıp açma (motor veya harici sürücü olmadan).
+> 3. **P3 — Analog Giriş / ADC (Potansiyometre veya Tek Sensör):** Dahili ADC ile analog voltaj okuma ve Serial Monitor'de görme.
+> 4. **P4 — Temel İletişim & Ekran (I2C & 0.91" OLED):** 2 kablolu I2C protokolü ile OLED ekrana yazı ve okunan sensör verisini yazdırma.
+>
+> ⚠️ **Karmaşık Bileşenler Nerede?**
+> Motor sürücüleri, HW-070 harici güç kontrolü, HC-SR04 zamanlama analizi, çift sensör füzyonu ve kesmeler **Orta Seviye (02_intermediate)** ve **İleri Seviye (03_advanced)** aşamalarında, temeller sağlam oturduktan sonra devreye girecektir.
+
 ---
 
 ### 01. ESP-WROOM-32 (`01_ESP_WROOM_32/`)
 **Odak Noktası:** IoT protokolleri, Çift Çekirdekli FreeRTOS görev yönetimi, Wi-Fi/BLE ve dahili analog/kapasitif çevrebirimler.
 
-#### 🟢 Başlangıç Seviyesi (`01_beginner/`)
-1. **`01_led_blink_and_boot_button`** — **Blink & Toolchain Doğrulaması (Dahili LED `GPIO2`, Harici Kırmızı LED `GPIO4` & `BOOT` Butonu `GPIO0`)**
-   - *Kavram:* Derleyici ve USB-UART yükleme hattını doğrulama; önce bloklayıcı `delay`/`vTaskDelay` ile, ardından `esp_timer` donanım kesmesiyle (Non-blocking) dahili ve harici LED'leri yakıp söndürme, `BOOT` butonuna basıldıkça yanıp sönme frekansını değiştirme.
-2. **`02_capacitive_touch_led_bar`** — **Kapasitif Dokunmatik Kontrol Paneli ve Harici PWM Analizörü (`Touch Pinleri`, `4 Renk LED`, `HW-070`, `HC-SR04`, `0.91" OLED`)**
-   - *Kavram:* ESP32'nin kapasitif dokunmatik pinleriyle LED modlarını seçme; `HW-070` potansiyometresinin ürettiği PWM sinyalini ve `HC-SR04` mesafe darbelerini GPIO harici kesmeleri (`RISING` / `FALLING` edge) ile yakalayıp frekansı, doluluk oranını (`%0-%100`) ve mesafeyi OLED ekranda ve renkli LED bar üzerinde gösterme.
-3. **`03_dht11_single_wire_oled`** — **Tek Hat Zamanlama Analizi ile İklim Okuyucu (`DHT11`, `0.91" OLED`, `Mavi/Yeşil/Kırmızı LED`)**
-   - *Kavram:* `DHT11` veri hattındaki 26-28µs ('0') ve 70µs ('1') darbelerini okuyup I2C üzerinden `0.91" OLED` ekranda sıcaklık, nem ve çiğlenme noktası (Dew Point) gösterimi; konfor sınırlarına göre durum LED'lerini sürme.
-4. **`04_max4466_adc_vu_meter`** — **ADC Doğrusallaştırma ve 10-LED Stüdyo VU-Metre (`MAX4466`, `0.91" OLED`, `10x Renkli LED`, `330Ω Dirençler`)**
-   - *Kavram:* ESP32 ADC'sinin doğrusal olmayan yapısını kalibre etme (`adc_cali`), `MAX4466` mikrofon çıkışından tepe-tepe (Peak-to-Peak) genlik ve dB hesabı yapıp hem OLED'de hem de breadboard üzerindeki 10 LED'de (Yeşil $\rightarrow$ Sarı $\rightarrow$ Kırmızı) dinamik ses barı oluşturma.
+#### 🟢 Başlangıç Seviyesi (`01_beginner/`) — Temel Yapı Taşları
+1. **`01_led_blink_and_boot_button`** — **[TAMAMLANDI ✅] Blink & Toolchain Doğrulaması (Harici LED & BOOT Butonu)**
+   - *Kavram:* Dijital çıkış (`OUTPUT`) ile LED sürme, `INPUT_PULLUP` ile `BOOT` butonunu okuma, Active-Low mantığı ve `arduino-cli` derleme/yükleme hattını doğrulama.
+2. **`02_capacitive_touch_led_bar`** — **[TAMAMLANDI ✅] Dahili Kapasitif Dokunmatik Sensör ve Gösterge LED'i (`T0 / GPIO 4`, Harici Mavi LED)**
+   - *Kavram:* ESP32'nin dahili kapasitif algılayıcısını (`touchRead()`) tanıma, parmak temasıyla kapasitans değişimini algılayıp dinamik eşik kalibrasyonuyla LED kontrolü sağlama.
+3. **`03_ledc_pwm_breathe_led`** — **LEDC Donanım PWM ile LED Parlaklık ve Nefes Alma Efekti (`GPIO 16/25`, Renkli LED)**
+   - *Kavram:* `delay()` ile işlemciyi kitlemeden donanımsal `ledc` modülü ile PWM sinyali üretme; LED parlaklığını kademeli artırıp azaltarak (Fade/Breathe) analog çıkış mantığını kavrama.
+4. **`04_i2c_oled_climate_display`** — **I2C 0.91" OLED Ekran ve DHT11 Sıcaklık/Nem Göstergesi (`0.91" OLED`, `DHT11`)**
+   - *Kavram:* 2 telli I2C haberleşme protokolü (`SDA`, `SCL`) ile tanışma; hazır kütüphane yardımıyla ekrana metin ve `DHT11` sensöründen okunan sıcaklık/nem değerlerini yazdırma.
 
 #### 🟡 Orta Seviye (`02_intermediate/`)
 5. **`05_dual_barometer_ips_trend`** — **Çift Sensörlü Barometrik Hava İstasyonu ve Trend Analizi (`GY-BMP280`, `BMP180`, `0.96" IPS Ekran`)**
@@ -134,21 +145,21 @@ Her kartta önce `P1 (Blink)` tamamlanacak, ardından yatay veya aile bazlı ola
 ### 02. Raspberry Pi Pico 2 W (`02_RPi_Pico_2_W/`)
 **Odak Noktası:** RP2350'nin benzersiz **PIO (Programmable I/O)** durum makineleri, hem ARM Cortex-M33 hem Hazard3 RISC-V çekirdeklerini deneyimleme ve DMA zincirleme.
 
-#### 🟢 Başlangıç Seviyesi (`01_beginner/`)
-1. **`01_led_blink_cyw43_and_gpio`** — **Blink & CYW43 Yardımcı Çip Mimarisi (`CYW43_WL_GPIO_LED_PIN` & Breadboard 4 Renk LED)**
-   - *Kavram:* Pico 2 W üzerindeki dahili LED'in RP2350'ye değil, **CYW43439 Wi-Fi çipinin GPIO pinine** bağlı olduğunu öğrenme; hem dahili LED'i hem de RP2350 GPIO pinlerine bağlı 4 renk LED'i donanımsal Interpolator ve Timer ile sürme.
-2. **`02_pwm_slices_and_bmp180_oled`** — **Donanım PWM Dilimleri (Slices) ve I2C Termometre (`HW-070`, `Motor Sürücüsü`, `BMP180`, `0.91" OLED`)**
-   - *Kavram:* RP2350'nin bir PWM dilimini `Motor Sürücüsü` için 20 kHz PWM üretmek, diğer dilimini `HW-070` görev döngüsünü donanımsal ölçmek için kurma ve `BMP180` sıcaklık/basınç verisini `0.91" OLED` ekrana yazdırma.
-3. **`03_adc_fifo_noise_bargraph`** — **ADC FIFO ve Yuvarlanan Pencere ile Ortam Gürültü Monitörü (`MAX4466`, `0.91" OLED`, `8x LED`)**
-   - *Kavram:* RP2350'nin dahili ADC FIFO tamponunu ve saat bölücüsünü kullanarak işlemciyi yormadan belirli aralıklarla `MAX4466` mikrofonunu okuma ve 8 LED'li bar-grafik sürme.
-4. **`04_emissivity_temp_comparison`** — **Çift Sensör Karşılaştırmalı Sıcaklık Deneyi (`DHT11`, `MLX90614`, `0.96" IPS Ekran`)**
-   - *Kavram:* Konveksiyonla ölçüm yapan `DHT11` ile kızılötesi radyasyonla ölçüm yapan `MLX90614`'ü aynı anda okuyup, farklı yüzeylerin emisivite (yayıcılık) etkisini `0.96" IPS` ekranda gözlemleme.
+#### 🟢 Başlangıç Seviyesi (`01_beginner/`) — Temel Yapı Taşları
+1. **`01_led_blink_cyw43_and_gpio`** — **[TAMAMLANDI ✅] Blink & CYW43 Yardımcı Çip Mimarisi (`CYW43_WL_GPIO_LED_PIN` & Harici LED)**
+   - *Kavram:* Pico 2 W üzerindeki dahili LED'in Wi-Fi çipine (`CYW43439`) bağlı olduğunu anlama, harici GPIO üzerinden LED sürme ve temel dijital çıkış mantığı.
+2. **`02_pwm_slice_breathe_led`** — **Donanım PWM Dilimleri (PWM Slices) ile LED Nefes Alma Efekti (Harici Renkli LED)**
+   - *Kavram:* Motor veya harici sürücülere girmeden; RP2350'nin donanımsal PWM dilimlerini (PWM slices) kullanarak tek bir LED'in parlaklığını yumuşakça kısıp açma (Fade In / Fade Out).
+3. **`03_adc_sound_level_monitor`** — **ADC ile Analog Giriş Okuma ve Ses/Voltaj Seviyesi Göstergesi (`MAX4466` veya Dahili Sıcaklık Sensörü, LED)**
+   - *Kavram:* RP2350'nin 12-bit ADC kanalı ile analog voltaj okuma, Serial Monitor'de ham veriyi izleme ve belirlenen eşik değere göre durum LED'ini yakma.
+4. **`04_i2c_bmp180_oled_weather`** — **I2C 0.91" OLED Ekran ve BMP180 Basınç/Sıcaklık İstasyonu (`0.91" OLED`, `BMP180`)**
+   - *Kavram:* Donanımsal I2C hattı üzerinden BMP180 sensöründen sıcaklık ve barometrik basınç verisini okuyup 0.91" OLED ekranda temiz bir arayüzle gösterme.
 
 #### 🟡 Orta Seviye (`02_intermediate/`)
-5. **`05_pio_ultrasonic_hcsr04_driver`** — **PIO (Programmable I/O) ile Sıfır CPU Yüklü HC-SR04 Sürücüsü (`HC-SR04`, `1kΩ/2kΩ Direnç`, `0.91" OLED`)**
+5. **`05_motor_driver_and_hw070_pwm`** — **Motor Sürücüsü, HW-070 ve Harici Güç Yönetimi (`Motor Sürücüsü`, `HW-070`, `HW-131 Breadboard Güç`)**
+   - *Kavram:* Harici breadboard güç modülü (HW-131) ile 5V/3.3V güç izolasyonu kurma; HW-070 potansiyometresi PWM çıkışını okuyup motor sürücüsü üzerinden DC motor hız ve yön kontrolü yapma.
+6. **`06_pio_ultrasonic_hcsr04_driver`** — **PIO (Programmable I/O) ile Sıfır CPU Yüklü HC-SR04 Sürücüsü (`HC-SR04`, `1kΩ/2kΩ Direnç`, `0.91" OLED`)**
    - *Kavram:* **PIO** assembly diliyle sadece birkaç satırlık bir durum makinesi yazarak, CPU hiç müdahale etmeden `HC-SR04`'e 10µs tetik verip Echo süresini sayarak RX FIFO'ya atan özel donanım modülü tasarlama.
-6. **`06_pio_custom_dht11_decoder`** — **PIO Tabanlı Özel DHT11 Protokol Çözücü (`DHT11`, `0.96" IPS Ekran`)**
-   - *Kavram:* Normalde kesmeleri kapatmayı gerektiren hassas zamanlamalı `DHT11` protokolünü tamamen bir PIO durum makinesine yıkarak ana işlemciyi %100 serbest bırakma.
 7. **`07_spi_dma_double_buffer_gui`** — **SPI DMA ile Yüksek Hızlı Grafik Arayüzü (`0.96" 80x160 RGB IPS Ekran`, `MPU6050`)**
    - *Kavram:* RAM'de tutulan 80x160x16-bit (25.6 KB) ekran tamponunu (Framebuffer) DMA kanalı üzerinden SPI'a aktarırken, işlemcinin aynı anda `MPU6050`'den veri okuyup bir sonraki kareyi (Double Buffering) hazırlaması.
 8. **`08_multicore_fifo_weather_station`** — **Çift Çekirdek (Multicore) FIFO Haberleşmeli Hava İstasyonu (`Pololu AltIMU-10 v5`, `0.96" IPS Ekran`)**
@@ -169,15 +180,15 @@ Her kartta önce `P1 (Blink)` tamamlanacak, ardından yatay veya aile bazlı ola
 ### 03. CRIUS ALL IN ONE PRO (`03_CRIUS_ATmega2560/`)
 **Odak Noktası:** 8-bit AVR mimarisi (`DDRx`, `PORTx`, `TCNTx`, `TWI`), kart üzerinde **yerleşik `MPU6050`, `HMC5883L` (Pusula) ve `MS5611` (Hassas Barometre)** sensörleri ve uçuş kontrol algoritmaları.
 
-#### 🟢 Başlangıç Seviyesi (`01_beginner/`)
-1. **`01_avr_register_blink_timer1`** — **8-Bit AVR Register Blink & 16-Bit Timer1 CTC Kesmesi (Dahili Durum LED'leri `PB7/PC6/PC7` & 8 Harici LED)**
-   - *Kavram:* `digitalWrite` kullanmadan doğrudan `DDRB |= (1 << PB7);` ve `PINB = (1 << PB7);` (AVR donanımsal pin toggle özelliği) ile LED yakıp söndürme; ardından 16-bit `Timer1` CTC (`TIMER1_COMPA_vect`) kesmesiyle 400 Hz ana kontrol döngüsü ve durum flaşörü kurma.
-2. **`02_dual_mpu6050_vibration_test`** — **Kart Üzerindeki Dahili MPU6050 ve Harici MPU6050 Karşılaştırması (`Dahili MPU6050`, `Harici MPU6050`, `0.91" OLED`, `LED Artı Kadranı`)**
-   - *Kavram:* `AD0` pini ile ikinci `MPU6050`'nin I2C adresini `0x69` yaparak (kart üzerindeki `0x68`'dir), iki farklı noktadaki titreşim ve açı farkını aynı I2C hattından okuyup OLED'de ve LED su terazisinde gösterme.
-3. **`03_icp_ultrasonic_landing_radar`** — **Input Capture (`ICP1` / `ICP4`) ile Ultrasonik İniş Radarı ve Gaz Ölçer (`HC-SR04`, `HW-070`, `0.91" OLED`, `Uyarı LED'leri`)**
-   - *Kavram:* ATmega2560'ın 16-bit Timer Input Capture donanımını ve gürültü iptal edicisini (`ICNC1`) kullanarak `HC-SR04` yere yakınlık irtifasını ve `HW-070` gaz referansını okuma.
-4. **`04_triple_barometer_altitude_race`** — **Üçlü Barometre Kalibrasyon ve Hassasiyet Yarışı (`Dahili MS5611`, `GY-BMP280`, `BMP180`, `0.96" IPS Ekran`)**
-   - *Kavram:* Kart üzerindeki `MS5611` (10 cm çözünürlük!) ile harici `GY-BMP280` ve `BMP180` sensörlerini aynı anda okuyup, kartı masadan 50 cm yukarı kaldırdığında hangisinin ne kadar hızlı tepki verdiğini `0.96" IPS` ekranda grafikleme.
+#### 🟢 Başlangıç Seviyesi (`01_beginner/`) — Temel Yapı Taşları
+1. **`01_avr_register_blink_timer1`** — **[TAMAMLANDI ✅] 8-Bit AVR Register Blink & Timer1 CTC Kesmesi**
+   - *Kavram:* `DDRB` ve `PINB` yazmaçlarıyla bare-metal pin kontrolü, 16-bit Timer1 CTC kesmesiyle arka plan durum flaşörü ve GPIO toggling mantığını anlama.
+2. **`02_timer_fast_pwm_led_dimmer`** — **Timer Fast-PWM ile LED Karartma / Dimmer (Harici LED)**
+   - *Kavram:* ATmega2560 donanımsal Timer Fast-PWM modunu (`OCRnA/B` yazmaçları) kullanarak işlemci döngüsünü meşgul etmeden harici LED'in parlaklığını kademeli kontrol etme.
+3. **`03_adc_analog_reading_and_threshold`** — **Dahili ADC ile Analog Voltaj Okuma ve Eşik Algılama (`ADMUX`, `ADCSRA`, LED)**
+   - *Kavram:* 10-bit dahili ADC çeviricisini yapılandırıp analog voltaj/potansiyometre okuma ve belirlenen eşik aşıldığında durum LED'ini tetikleme.
+4. **`04_i2c_oled_internal_sensor`** — **I2C 0.91" OLED Ekran ve Kart Üzerindeki Dahili MPU6050 Eğim Açısı (`0.91" OLED`, Dahili Sensör)**
+   - *Kavram:* CRIUS kartı üzerinde yerleşik bulunan MPU6050 sensöründen I2C ile açı verisi çekip 0.91" OLED ekrana su terazisi gibi temiz bir gösterge çizdirme.
 
 #### 🟡 Orta Seviye (`02_intermediate/`)
 5. **`05_nonblocking_twi_isr_driver`** — **8-Bit İşlemcide Kesme Güdümlü (Non-Blocking) TWI (I2C) Durum Makinesi (`Pololu AltIMU-10 v5`, `0.91" OLED`)**
@@ -204,15 +215,15 @@ Her kartta önce `P1 (Blink)` tamamlanacak, ardından yatay veya aile bazlı ola
 ### 04. TI MSP-EXP430G2 LaunchPad (`04_TI_MSP430G2553/`)
 **Odak Noktası:** Sadece **16 KB Flash ve 512 Byte RAM**! Doğrudan **Register seviyesinde (`P1DIR`, `TACTL`, `UCB0CTL1`)** kod yazma, bellek optimizasyonu ve Low-Power Mode (`LPM0` - `LPM4`).
 
-#### 🟢 Başlangıç Seviyesi (`01_beginner/`)
-1. **`01_baremetal_wdt_and_gpio_blink`** — **Blink & 8-Bit Binary Sayaç (`WDTCTL`, Dahili `P1.0/P1.6` LED, `P1.3` Buton & Breadboard 8 LED)**
-   - *Kavram:* `WDTCTL = WDTPW | WDTHOLD;` ile Watchdog Timer'ı durdurma; bit maskeleme (`P1DIR |= BIT0;`, `P1OUT ^= BIT0;`), `P1.3` kesmesi (`P1IE`, `P1IFG`) ve breadboard üzerinde 8-bit ikilik LED sayaç.
-2. **`02_timera_pwm_and_rc_touch`** — **Timer_A Donanımsal PWM ve 1MΩ RC Kapasitif Dokunmatik (`Motor Sürücüsü`, `HW-070`, `1MΩ Direnç`, `Renkli LED'ler`)**
-   - *Kavram:* İşlemciyi `LPM0` uykusuna sokup `Timer_A` `OUTMOD_7` moduyla kesintisiz PWM üretme ve `1MΩ` direnç üzerinden parmak dokunuşuyla oluşan RC şarj süresini ölçerek dokunmatik anahtar yapma.
-3. **`03_adc10_interrupt_sound_detector`** — **10-Bit ADC10 ve Kesme Güdümlü Ses/Gerilim Eşik Algılayıcı (`Mikrofon Modülü`, `MAX4466`, `1kΩ/10kΩ/100kΩ Dirençler`)**
-   - *Kavram:* `ADC10CTL0` ve `ADC10CTL1` yazmaçlarını kurup dönüşüm bittiğinde oluşan `ADC10_VECTOR` kesmesi içinde mikrofon genliğini kontrol etme; `while(1)` içinde hiç kod çalıştırmadan tamamen kesmelerle sistem kurma.
-4. **`04_timera_capture_hcsr04_uart`** — **Timer_A Capture Modu ile Ultrasonik Mesafe ve HW-070 Duty-Cycle Ölçümü (`HC-SR04`, `HW-070`, `1kΩ/2kΩ Direnç`)**
-   - *Kavram:* `TACCTLx` yazmacında `CM_3` (her iki kenarda yakalama) ve `CAP` bitlerini kullanarak `HC-SR04` Echo darbesini ve `HW-070` darbe genişliğini `TAR` sayacıyla ölçüp donanımsal UART (9600 baud) ile PC'ye gönderme.
+#### 🟢 Başlangıç Seviyesi (`01_beginner/`) — Temel Yapı Taşları
+1. **`01_baremetal_wdt_and_gpio_blink`** — **Bare-Metal Blink & Buton Okuma (`WDTCTL`, Dahili `P1.0/P1.6` LED, `P1.3` Buton)**
+   - *Kavram:* `WDTCTL = WDTPW | WDTHOLD;` ile Watchdog'u durdurma; bit maskeleme (`P1DIR`, `P1OUT`), `P1IN` ile buton okuma ve kesmeler.
+2. **`02_timera_pwm_led_fade`** — **Timer_A Donanımsal PWM ile LED Nefes Alma Efekti (Harici Renkli LED)**
+   - *Kavram:* Motor veya harici devrelere girmeden, sadece `Timer_A` `OUTMOD_7` modu ile işlemci uykudayken LED parlaklığını kademeli kısıp açma.
+3. **`03_adc10_single_channel_reading`** — **10-Bit ADC10 ile Analog Voltaj Okuma ve Eşik Algılama (Potansiyometre/Sensör)**
+   - *Kavram:* `ADC10CTL0` ve `ADC10CTL1` yazmaçlarıyla analog voltaj okuma; belirlenen eşik aşıldığında durum LED'ini yakma.
+4. **`04_uart_serial_telemetry_print`** — **Donanımsal UART ile Seri Veri İletişimi (`USCI_A0`, 9600 Baud)**
+   - *Kavram:* 512 Byte RAM'i yormadan, donanımsal UART modülü üzerinden okunan analog verileri ve metinleri bilgisayar ekranına (Serial Monitor) yazdırma.
 
 #### 🟡 Orta Seviye (`02_intermediate/`)
 5. **`05_zero_buffer_oled_driver`** — **512 Byte RAM ile OLED Ekran Sürme (Framebuffersız Doğrudan Çizim) (`0.91" OLED`)**
@@ -239,15 +250,15 @@ Her kartta önce `P1 (Blink)` tamamlanacak, ardından yatay veya aile bazlı ola
 ### 05. TI MSP430F5529 LaunchPad (`05_TI_MSP430F5529_LP/`)
 **Odak Noktası:** Gelişmiş UCS (Unified Clock System), 3 kanallı DMA, 12-bit `ADC12_A`, donanım çarpanı `MPY32` ve çip içi **Full-Speed USB 2.0** donanımı.
 
-#### 🟢 Başlangıç Seviyesi (`01_beginner/`)
-1. **`01_ucs_25mhz_dual_port_blink`** — **Blink & UCS 25 MHz Doğrulaması (Dahili `P1.0` Kırmızı, `P4.7` Yeşil LED, `P1.1/P2.1` Butonlar & Harici LED Dizisi)**
-   - *Kavram:* `PMM` çekirdek voltajını kademeli artırıp FLL ile MCLK saatini 25 MHz'e çıkararak `Timer_A` ve `Timer_B` kesmeleriyle poliritmik LED Blink yapma.
-2. **`02_timerb_shadow_pwm_and_hw070`** — **Timer_B7 ile PWM Üretimi ve Timer_A ile HW-070 Sinyal Analizi (`Motor Sürücüsü`, `HW-070`, `HW-131`, `0.91" OLED`)**
-   - *Kavram:* `Timer_B` modülünün gölge yazmaç (Shadow Register) özelliğiyle parazitsiz PWM üretirken, `Timer_A` Capture modülüyle `HW-070` çıkış frekansını ve görev döngüsünü eşzamanlı ölçüp OLED'de gösterme.
-3. **`03_adc12_sequence_channels_vu`** — **ADC12_A Sıralı Kanal Tarama ve 12-LED Bar-Grafik (`MAX4466`, `LiPo Şarj Entegresi`, `12x Renkli LED`, `0.91" OLED`)**
-   - *Kavram:* 12-bit ADC'nin `ADC12MCTL0..15` bellek yazmaçlarını kullanarak tek tetiklemede hem `MAX4466` mikrofonunu, hem LiPo voltajını, hem de dahili sıcaklık sensörünü sırayla okuma ve 12 LED'de gösterme.
-4. **`04_dual_usci_i2c_and_spi_ips`** — **USCI_B I2C ve USCI_A SPI Eşzamanlı Kullanımı (`GY-BMP280`, `0.96" IPS Ekran`)**
-   - *Kavram:* Bağımsız `USCI_B0` (I2C) ve `USCI_A0` (SPI) donanımlarını aynı anda kullanarak `GY-BMP280` verilerini renkli `0.96" IPS` ekrana basma.
+#### 🟢 Başlangıç Seviyesi (`01_beginner/`) — Temel Yapı Taşları
+1. **`01_ucs_25mhz_dual_port_blink`** — **[TAMAMLANDI ✅] Blink & UCS 25 MHz Doğrulaması (Dahili `P1.0` Kırmızı, `P4.7` Yeşil LED)**
+   - *Kavram:* `PMM` çekirdek voltajı ve UCS ile MCLK saatini 25 MHz'e çıkarma; Timer kesmeleriyle poliritmik LED Blink yapma.
+2. **`02_timerb_pwm_led_fade`** — **Timer_B Donanımsal PWM ile LED Nefes Alma Efekti (Harici Renkli LED)**
+   - *Kavram:* Motor veya karmaşık sürücüler olmadan, `Timer_B` modülünü kullanarak pürüzsüz donanımsal PWM üretme ve LED parlaklığını nefes alma efektiyle kontrol etme.
+3. **`03_adc12_single_channel_pot`** — **12-Bit ADC12_A ile Analog Voltaj Okuma ve Eşik Algılama (Potansiyometre/Sensör)**
+   - *Kavram:* 12-bit yüksek çözünürlüklü ADC12 kanalından veri okuyup belirlenen voltaj eşiğine göre durum LED'ini tetikleme.
+4. **`04_i2c_oled_basic_display`** — **USCI_B I2C Modülü ve 0.91" OLED Ekran (`0.91" OLED`, `BMP180`)**
+   - *Kavram:* USCI_B donanımsal I2C hattı üzerinden OLED ekrana yazı yazdırma ve sensör sıcaklık değerini ekranda gösterme.
 
 #### 🟡 Orta Seviye (`02_intermediate/`)
 5. **`05_dma0_spi_thermal_display`** — **DMA Kontrolcüsü ile SPI Ekran Yenileme (`0.96" IPS Ekran`, `MLX90614`)**
@@ -274,15 +285,15 @@ Her kartta önce `P1 (Blink)` tamamlanacak, ardından yatay veya aile bazlı ola
 ### 06. TI EK-TM4C123GXL (`06_TI_TM4C123GXL_TivaC/`)
 **Odak Noktası:** ARM Cortex-M4F mimarisi (NVIC kesme öncelikleri, SysTick, Bit-Banding), Motion Control PWM modülleri ve çift 12-bit ADC (Sample Sequencer yapısı).
 
-#### 🟢 Başlangıç Seviyesi (`01_beginner/`)
-1. **`01_rgb_blink_bitbanding_pf0_unlock`** — **7-Renkli RGB Blink, Bit-Banding ve `PF0` NMI Kilidi Açma (Dahili RGB LED `PF1/PF2/PF3`, `SW1/SW2` & Harici LED'ler)**
-   - *Kavram:* `PF0 (SW2)` pininin NMI kilidini açma (`GPIO_PORTF_LOCK_R = 0x4C4F434B;`); Cortex-M4 Bit-Banding adreslemesi ve 24-bit `SysTick` kesmesiyle dahili RGB LED ve breadboard LED'lerinde renk geçişli Blink yapma.
-2. **`02_wide_timer_64bit_capture`** — **32/64-Bit Wide Timer Capture ile Ultrasonik Mesafe ve HW-070 Analizi (`HC-SR04`, `HW-070`)**
-   - *Kavram:* `WTIMER0` (32/64-bit Wide Timer) kullanarak taşma derdi olmadan 80 MHz çözünürlükte (12.5 ns hassasiyet!) `HC-SR04` darbe süresini ve `HW-070` görev döngüsünü ölçme.
-3. **`03_adc_sequencer_hardware_averaging`** — **ADC Sample Sequencer (`SS3`) ve Donanımsal Ortalamalı Ses Okuma (`MAX4466`, `0.91" OLED`)**
-   - *Kavram:* TM4C123'ün **Sample Sequencer** mimarisini ve `ADCSAC` (64x donanımsal ortalama) yazmacını kullanarak gürültüsüz ses seviyesi ölçümü.
-4. **`04_i2c_burst_mlx90614_bmp180`** — **I2C Master Modülü ile Temassız Sıcaklık ve Basınç Okuyucu (`MLX90614`, `BMP180`, `0.91" OLED`)**
-   - *Kavram:* TM4C123'ün `I2C0` modülünde tekli ve çoklu bayt okuma (`I2C_MASTER_CMD_BURST_RECEIVE_START / CONT / FINISH`) durum geçişlerini kodlama ve sıcaklığa göre RGB uyarı verme.
+#### 🟢 Başlangıç Seviyesi (`01_beginner/`) — Temel Yapı Taşları
+1. **`01_rgb_blink_bitbanding_pf0_unlock`** — **[TAMAMLANDI ✅] 7-Renkli RGB Blink, Bit-Banding ve PF0 Kilidi Açma**
+   - *Kavram:* `PF0 (SW2)` pininin NMI kilidini açma; Cortex-M4 Bit-Banding adreslemesi ve SysTick kesmesiyle dahili RGB LED'de temel Blink yapma.
+2. **`02_pwm_rgb_breathe_color_mixing`** — **Donanım PWM ile RGB LED Nefes Alma ve Renk Karışımı (Dahili RGB LED)**
+   - *Kavram:* Donanımsal PWM modülünü kullanarak Kırmızı, Yeşil ve Mavi kanalların doluluk oranını (Duty Cycle) bağımsız değiştirip renk geçişleri (Color Fading) yapma.
+3. **`03_adc_sequencer_pot_reading`** — **ADC Sample Sequencer ile Analog Voltaj Okuma ve Eşik Algılama (Potansiyometre/Sensör)**
+   - *Kavram:* TM4C123'ün benzersiz **Sample Sequencer** mimarisini tanıma; tek kanaldan analog voltaj okuma ve belirlenen eşik aşıldığında RGB LED ile renkli uyarı verme.
+4. **`04_i2c_oled_climate_display`** — **I2C Master Modülü ve 0.91" OLED Ekran (`0.91" OLED`, `BMP180`)**
+   - *Kavram:* TM4C123'ün donanımsal I2C modülünü kullanarak 0.91" OLED ekranda yazı ve BMP180 sensöründen sıcaklık verisini gösterme.
 
 #### 🟡 Orta Seviye (`02_intermediate/`)
 5. **`05_motion_pwm_deadband_generator`** — **Özel Motion Control PWM Üreteci ve Ölü Zaman (Dead-Band) Kontrolü (`Motor Sürücüsü`, `HW-070`, `HW-131`, `0.91" OLED`)**
@@ -309,15 +320,15 @@ Her kartta önce `P1 (Blink)` tamamlanacak, ardından yatay veya aile bazlı ola
 ### 07. ST NUCLEO-U575ZI-Q (`07_ST_NUCLEO_U575ZI_Q/`)
 **Odak Noktası:** Ultra-Low-Power (`STOP 0/1/2/3`, `STANDBY`), dahili SMPS (`-Q` serisi), **LPBAM** (CPU uyurken DMA ve çevrebirimlerin otonom çalışması), CORDIC/FMAC ve ARM **TrustZone**.
 
-#### 🟢 Başlangıç Seviyesi (`01_beginner/`)
-1. **`01_smps_power_and_bsrr_blink`** — **Blink & SMPS Güç Modu Doğrulaması (Dahili `LD1/LD2/LD3`, `B1` Butonu & Harici LED'ler)**
-   - *Kavram:* Dahili **SMPS (Switched-Mode Power Supply)** regülatörünü aktif ederek `GPIOx_BSRR` atomik yazmacıyla Blink yapma ve `LPUART1` konsol çıkışını doğrulama.
-2. **`02_lptim_low_power_ultrasonic`** — **Düşük Güç Zamanlayıcısı (`LPTIM`) ile Ultrasonik Mesafe Ölçer (`HC-SR04`, `0.91" OLED`, `Renkli LED'ler`)**
-   - *Kavram:* Ana sistem saati kapalıyken bile çalışabilen `LPTIM1` çevrebirimini kullanarak uyku modunda PWM üretimi ve darbe süresi ölçümü yapma.
-3. **`03_hardware_crc_climate_packet`** — **Sıcaklık ve Nem Verilerinin Donanımsal CRC ile Paketlenmesi (`DHT11`, `BMP180`)**
-   - *Kavram:* `DHT11` ve `BMP180` verilerini okuduktan sonra STM32'nin donanımsal **CRC** birimini kullanarak veri paketlerine hata denetim kodu ekleme.
-4. **`04_adc14_vrefint_battery_monitor`** — **14-Bit ADC ve Batarya/Güç Hattı İzleme (`LiPo Şarj Entegresi`, `HW-131`, `100kΩ Dirençler`, `0.91" OLED`)**
-   - *Kavram:* STM32U5'in 14-bit ADC'sini ve dahili referans voltajını (`VREFINT`) kullanarak besleme voltajındaki dalgalanmaları ve LiPo pil doluluk oranını milivolt hassasiyetinde ölçme.
+#### 🟢 Başlangıç Seviyesi (`01_beginner/`) — Temel Yapı Taşları
+1. **`01_smps_power_and_bsrr_blink`** — **[TAMAMLANDI ✅] Blink & SMPS Güç Modu Doğrulaması (Dahili `LD1/LD2/LD3`, `B1` Butonu)**
+   - *Kavram:* Dahili SMPS regülatörünü aktif ederek `GPIOx_BSRR` atomik yazmacıyla Blink yapma, butonu okuma ve `LPUART1` konsol çıkışını doğrulama.
+2. **`02_timer_pwm_breathe_led`** — **Donanım Timer PWM ile LED Nefes Alma Efekti (Harici Renkli LED)**
+   - *Kavram:* STM32 Timer donanımını kullanarak işlemciyi yormadan PWM sinyali üretme ve LED parlaklığını yumuşakça değiştirme.
+3. **`03_adc14_single_channel_reading`** — **14-Bit ADC ile Analog Voltaj Okuma ve Eşik Algılama (Potansiyometre/Sensör)**
+   - *Kavram:* STM32U5'in 14-bit ADC'sini kullanarak analog voltaj okuma ve belirlenen eşik aşıldığında durum LED'ini yakma.
+4. **`04_i2c_oled_climate_display`** — **I2C 0.91" OLED Ekran ve BMP180 Sıcaklık/Basınç İstasyonu (`0.91" OLED`, `BMP180`)**
+   - *Kavram:* Donanımsal I2C hattı üzerinden BMP180 sensörünü okuyup 0.91" OLED ekranda temiz bir kullanıcı arayüzü ile gösterme.
 
 #### 🟡 Orta Seviye (`02_intermediate/`)
 5. **`05_stop2_rtc_forced_bmp280`** — **STOP2 Uyku Modu ve RTC Wakeup ile Yıllarca Yaşayan Hava İstasyonu (`GY-BMP280`, `0.91" OLED`, `LiPo Şarj Entegresi`)**
@@ -344,15 +355,15 @@ Her kartta önce `P1 (Blink)` tamamlanacak, ardından yatay veya aile bazlı ola
 ### 08. ST P-NUCLEO-WB55 (`08_ST_P_NUCLEO_WB55/`)
 **Odak Noktası:** Cortex-M0+ radyo çekirdeği (BLE 5.0, Zigbee, 802.15.4), Cortex-M4 uygulama çekirdeği, çekirdekler arası **IPCC / HSEM** haberleşmesi ve paket içindeki **USB Dongle** ile çift taraflı kablosuz ağ kurma.
 
-#### 🟢 Başlangıç Seviyesi (`01_beginner/`)
-1. **`01_dual_core_hsem_and_dongle_blink`** — **Blink & Donanım Semaforları (`HSEM`) (Nucleo-68 `LD1/LD2/LD3`, USB Dongle LED'leri & `SW1/SW2/SW3`)**
-   - *Kavram:* Hem Nucleo-68 kartında hem de USB Dongle üzerinde Blink yaparak programlayıcıyı doğrulama; çift çekirdekli yapıda paylaşılan GPIO/RCC kaynaklarına erişirken **HSEM (Hardware Semaphore)** ve Sequencer kullanımını öğrenme.
-2. **`02_tim2_capture_and_bmp180_oled`** — **Timer Input Capture ve Düşük Güçlü OLED Göstergesi (`HW-070`, `BMP180`, `0.91" OLED`)**
-   - *Kavram:* STM32WB55 üzerinde `TIM2` Input Capture ile `HW-070` görev döngüsünü ve I2C1 hattından `BMP180` basınç/sıcaklık verisini okuyup `0.91" OLED` ekrana yazdırma.
-3. **`03_adc_audio_envelope_ips_alert`** — **ADC ile Ortam Sesi Algılama ve Görsel Uyarı (`MAX4466`, `0.96" IPS Ekran`, `Yeşil/Sarı/Kırmızı LED`)**
-   - *Kavram:* 12-bit ADC ile `MAX4466` mikrofonunu örnekleyip ortamın ses zarfını (Envelope) çıkarma ve `0.96" RGB IPS` ekran ile LED'lerde ses şiddetine göre uyarı verme.
-4. **`04_mosfet_thermal_load_scanner`** — **Güç Katı Sıcaklık ve Yük Tarayıcı (`MLX90614`, `HW-070`, `0.91" OLED`)**
-   - *Kavram:* `HW-070` üzerindeki potansiyometreyle yükü değiştirirken `MLX90614`'ten saniyede 10 kez okuma yaparak görev döngüsüne bağlı MOSFET sıcaklık artışını OLED ekranda raporlama.
+#### 🟢 Başlangıç Seviyesi (`01_beginner/`) — Temel Yapı Taşları
+1. **`01_dual_core_hsem_and_dongle_blink`** — **[TAMAMLANDI ✅] Dual-Core Blink & HSEM Doğrulaması (Nucleo & USB Dongle LED)**
+   - *Kavram:* Donanım semaforlarını (`HSEM`) ve çift çekirdekli mimaride GPIO erişimini doğrulama; harici LED üzerinde temel Blink yapma.
+2. **`02_timer_pwm_breathe_led`** — **Timer PWM ile LED Parlaklık ve Nefes Alma Efekti (Harici Renkli LED)**
+   - *Kavram:* Donanımsal Timer PWM kanalı kullanarak harici LED'in parlaklığını nefes alma (Fade) efektiyle pürüzsüz kontrol etme.
+3. **`03_adc_audio_envelope_alert`** — **ADC ile Analog Giriş Okuma ve Eşik Algılama (`MAX4466` / Potansiyometre, LED)**
+   - *Kavram:* 12-bit ADC ile mikrofon veya analog potansiyometre voltajını okuma; ses/voltaj seviyesine göre durum LED'lerini yakma.
+4. **`04_i2c_oled_climate_display`** — **I2C 0.91" OLED Ekran ve BMP180 İstasyonu (`0.91" OLED`, `BMP180`)**
+   - *Kavram:* I2C1 hattı üzerinden BMP180 sensörünü okuyup 0.91" OLED ekranda oda sıcaklık ve basıncını temiz bir arayüzle gösterme.
 
 #### 🟡 Orta Seviye (`02_intermediate/`)
 5. **`05_custom_ble_gatt_weather_server`** — **Özel BLE GATT Sunucusu (Custom Service & Characteristic) (`GY-BMP280`, `DHT11`, `0.91" OLED`)**
@@ -379,15 +390,15 @@ Her kartta önce `P1 (Blink)` tamamlanacak, ardından yatay veya aile bazlı ola
 ### 09. ST NUCLEO-H723ZG (`09_ST_NUCLEO_H723ZG/`)
 **Odak Noktası:** 550 MHz hız, Çift Hassasiyetli FPU, ARM CMSIS-DSP kütüphanesi, Önbellek (I-Cache / D-Cache) tutarlılığı, gelişmiş DMA (MDMA/BDMA) ve yüksek hızlı sinyal işleme.
 
-#### 🟢 Başlangıç Seviyesi (`01_beginner/`)
-1. **`01_550mhz_pll_and_dwt_cycle_blink`** — **Blink, 550 MHz Clock Tree & DWT Kod Profilleme (Dahili `LD1/LD2/LD3`, `B1` Butonu & Harici 10 LED)**
-   - *Kavram:* H7 serisinin PLL1 saat ağacını 550 MHz'e çıkarma; `DWT->CYCCNT` sayacıyla nanosaniye hassasiyetinde kod hızı ölçme (I-Cache/D-Cache ve ITCM RAM etkisi) ve LED dizisini sürme.
-2. **`02_pwm_input_mode_hcsr04_hw070`** — **Donanım Timer Input Capture ve PWM Input Modu (`HC-SR04`, `HW-070`, `0.91" OLED`)**
-   - *Kavram:* STM32 Timer'larının özel **PWM Input Mode** (`CCR1` periyot, `CCR2` görev döngüsü) özelliğini kullanarak hem `HC-SR04` ultrasonik mesafeyi hem de `HW-070` sinyalini sıfır yazılım gecikmesiyle ölçme.
-3. **`03_adc16_hardware_oversampling`** — **16-Bit ADC Donanımsal Aşırı Örnekleme (Oversampling) (`MAX4466`, `0.91" OLED`)**
-   - *Kavram:* STM32H7'nin 16-bit ADC'sindeki donanımsal **Oversampling** ve bit kaydırma özelliğini aktif ederek `MAX4466` sinyalindeki gürültüyü yazılıma yük bindirmeden filtreleme.
-4. **`04_double_fpu_barometer_math`** — **I2C Bellek Okuma (`Mem_Read`) ve Çift Hassasiyetli FPU Matematiği (`GY-BMP280`, `BMP180`)**
-   - *Kavram:* `HAL_I2C_Mem_Read` ile sensör register haritalarını okuma; Cortex-M7'nin donanımsal çift hassasiyetli (`double`) FPU birimini kullanarak basınç/irtifa denklemlerini çözme.
+#### 🟢 Başlangıç Seviyesi (`01_beginner/`) — Temel Yapı Taşları
+1. **`01_550mhz_pll_and_dwt_cycle_blink`** — **[TAMAMLANDI ✅] Blink & 550 MHz Mimari Doğrulaması (Dahili LD1/LD2/LD3)**
+   - *Kavram:* 550 MHz Cortex-M7 mimarisinde D-Cache ve saat ağacını yapılandırarak atomik GPIO çıkışı ve temel Blink kontrolü.
+2. **`02_timer_pwm_breathe_led`** — **550 MHz Timer PWM ile LED Nefes Alma Efekti (Harici Renkli LED)**
+   - *Kavram:* Yüksek hızlı timer çevrebirimini kullanarak donanımsal PWM üretme ve LED parlaklığını nefes alma efektiyle yumuşakça kontrol etme.
+3. **`03_adc16_single_channel_pot`** — **16-Bit Yüksek Çözünürlüklü ADC ile Analog Voltaj Okuma (Potansiyometre/Sensör)**
+   - *Kavram:* H7'nin 16-bit ADC çeviricisini kullanarak gürültüsüz analog voltaj okuma ve eşik değere göre durum LED'ini tetikleme.
+4. **`04_i2c_oled_climate_display`** — **I2C 0.91" OLED Ekran ve BMP180 Basınç/Sıcaklık İstasyonu (`0.91" OLED`, `BMP180`)**
+   - *Kavram:* I2C donanım modülü üzerinden BMP180 sensörünü okuyup 0.91" OLED ekranda temiz bir kullanıcı arayüzü ile gösterme.
 
 #### 🟡 Orta Seviye (`02_intermediate/`)
 5. **`05_dma_dcache_coherency_ips_gui`** — **DMA + D-Cache Tutarlılığı (Cache Coherency) ile Yüksek Hızlı Ekran Sürüşü (`0.96" IPS Ekran`, `MLX90614`)**
