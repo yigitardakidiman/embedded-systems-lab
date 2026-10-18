@@ -33,6 +33,7 @@ obj/
 # 2. Arduino CLI, PlatformIO, ESP-IDF ve RPi Pico SDK
 # -----------------------------------------------------------------------------
 .pio/
+platformio.ini
 .arduino/
 managed_components/
 sdkconfig.old

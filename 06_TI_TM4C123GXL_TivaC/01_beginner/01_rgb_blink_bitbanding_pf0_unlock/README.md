@@ -114,3 +114,4 @@ Ana proje dizinindeyken (`embedded-systems-lab/`):
 | Periyodik LED Blink (`PB5`) | `PF4` (`SW1`) Buton Basılı (LED Açık) | `PF4` (`SW1`) Buton Serbest (LED Kapalı) |
 | :---: | :---: | :---: |
 | ![LED Blink](./media/blink.JPEG) | ![Buton Basılı](./media/button_press.JPEG) | ![Buton Serbest](./media/button_release.JPEG) |
+
