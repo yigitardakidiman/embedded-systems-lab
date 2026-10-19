@@ -58,7 +58,7 @@ Her kartta önce `P1 (Blink)` tamamlanacak, ardından yatay veya aile bazlı ola
 | # | Geliştirme Kartı | P1 (Blink) | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10 | P11 | P12 |
 | :-: | :--- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | **01** | **ESP-WROOM-32** | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **02** | **Raspberry Pi Pico 2 W** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **02** | **Raspberry Pi Pico 2 W** | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **03** | **CRIUS ALL IN ONE PRO** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **04** | **TI MSP-EXP430G2** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **05** | **TI MSP430F5529 LP** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
@@ -146,8 +146,8 @@ Her kartta önce `P1 (Blink)` tamamlanacak, ardından yatay veya aile bazlı ola
 **Odak Noktası:** RP2350'nin benzersiz **PIO (Programmable I/O)** durum makineleri, hem ARM Cortex-M33 hem Hazard3 RISC-V çekirdeklerini deneyimleme ve DMA zincirleme.
 
 #### 🟢 Başlangıç Seviyesi (`01_beginner/`) — Temel Yapı Taşları
-1. **`01_led_blink_cyw43_and_gpio`** — **Blink & CYW43 Yardımcı Çip Mimarisi (`CYW43_WL_GPIO_LED_PIN` & Harici LED)**
-   - *Kavram:* Pico 2 W üzerindeki dahili LED'in Wi-Fi çipine (`CYW43439`) bağlı olduğunu anlama, harici GPIO üzerinden LED sürme ve temel dijital çıkış mantığı.
+1. **`01_led_blink_cyw43_and_gpio`** — **Blink & CYW43 Yardımcı Çip Mimarisi (`CYW43_WL_GPIO_LED_PIN` & Harici LED)** **[TAMAMLANDI ✅]**
+   - *Kavram:* Resmi Pico C/C++ SDK v2.3.1 mimarisi, Pico 2 W üzerindeki dahili LED'in Wi-Fi çipine (`CYW43439`) bağlı olduğunu kavrayıp `cyw43_arch_init()` ile sürme, RP2350 SIO üzerinden harici GPIO LED (`hardware/gpio.h`) yönetimi ve UF2 bootloader hattını doğrulama.
 2. **`02_pwm_slice_breathe_led`** — **Donanım PWM Dilimleri (PWM Slices) ile LED Nefes Alma Efekti (Harici Renkli LED)**
    - *Kavram:* Motor veya harici sürücülere girmeden; RP2350'nin donanımsal PWM dilimlerini (PWM slices) kullanarak tek bir LED'in parlaklığını yumuşakça kısıp açma (Fade In / Fade Out).
 3. **`03_adc_sound_level_monitor`** — **ADC ile Analog Giriş Okuma ve Ses/Voltaj Seviyesi Göstergesi (`MAX4466` veya Dahili Sıcaklık Sensörü, LED)**

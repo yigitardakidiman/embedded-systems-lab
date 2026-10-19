@@ -21,7 +21,7 @@ Her kartta önce `P1 (Blink & Buton)` ile derleyici/yükleyici doğrulaması yap
 | # | Geliştirme Kartı | Mimari / Çekirdek | P1 (Blink) | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10 | P11 | P12 |
 | :-: | :--- | :--- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | **01** | **ESP-WROOM-32** | Dual Xtensa LX6 (240 MHz, Wi-Fi/BLE) | [✅](01_ESP_WROOM_32/01_beginner/01_led_blink_and_boot_button/) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **02** | **Raspberry Pi Pico 2 W** | RP2350 (Dual Cortex-M33 / RISC-V + PIO) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **02** | **Raspberry Pi Pico 2 W** | RP2350 (Dual Cortex-M33 / RISC-V + PIO) | [✅](02_RPi_Pico_2_W/01_beginner/01_led_blink_cyw43_and_gpio/) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **03** | **CRIUS ALL IN ONE PRO** | 8-Bit AVR ATmega2560 (Flight Controller) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **04** | **TI MSP-EXP430G2** | 16-Bit Ultra-Low-Power RISC (512B RAM) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **05** | **TI MSP430F5529 LP** | 16-Bit RISC (25 MHz, DMA, USB, 12-Bit ADC) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
