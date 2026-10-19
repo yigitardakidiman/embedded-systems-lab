@@ -16,3 +16,4 @@ Laboratuvar genelinde **saf doğal ekosistemlere (Native SDK / STM32Cube HAL / E
 * **07_ST_NUCLEO_U575ZI_Q:** P1 (SMPS Power & BSRR Blink)
 * **08_ST_P_NUCLEO_WB55:** P1 (Dual-Core HSEM & Dongle Blink)
 * **09_ST_NUCLEO_H723ZG:** P1 (M7 550MHz D-Cache Clean Blink)
+
