@@ -141,32 +141,27 @@ Tüm projelerin derleme ve yükleme süreçleri VS Code içinde **PlatformIO IDE
 
 ### 3. ESP-WROOM-32 (ESP32)
 * **Kütüphane:** Resmi **ESP-IDF (Espressif IoT Development Framework)** (`driver/gpio.h`, `driver/ledc.h`, `freertos/FreeRTOS.h`, `freertos/task.h` vb.).
-* **VS Code Ortamı:** **PlatformIO IDE** (`framework = espidf`) veya resmi **ESP-IDF VS Code Extension**.
+* **VS Code Ortamı:** **PlatformIO IDE** (`framework = espidf`).
 * **Giriş Noktası & Mantık:** FreeRTOS başlatıcı girişi `void app_main(void)` ve görev (Task) döngüsü.
-* **Temel Kavramlar:** Çoklu çekirdek (Dual-Core Xtensa), `gpio_config_t` yapılandırma struct'ı, `vTaskDelay` ile kilitlenmeyen (non-blocking) görev zamanlaması.
-* **Örnek Doğal Kod Yapısı:**
+* **Temel Kavramlar:** Çoklu çekirdek (Dual-Core Xtensa), `gpio_reset_pin` & `gpio_set_direction` ile sade pin yönetimi, `vTaskDelay` ile kilitlenmeyen (non-blocking) görev zamanlaması. *(Not: Çoklu pin ve kesme gereken adımlarda `gpio_config_t` struct yapısı kullanılır).*
+* **Örnek Doğal Kod Yapısı (Sade & Temiz Model):**
   ```c
+  #include <stdio.h>
+  #include "driver/gpio.h"
   #include "freertos/FreeRTOS.h"
   #include "freertos/task.h"
-  #include "driver/gpio.h"
 
   #define LED_PIN GPIO_NUM_2
 
   void app_main(void) {
-      gpio_config_t io_conf = {
-          .pin_bit_mask = (1ULL << LED_PIN),
-          .mode = GPIO_MODE_OUTPUT,
-          .pull_up_en = GPIO_PULLUP_DISABLE,
-          .pull_down_en = GPIO_PULLDOWN_DISABLE,
-          .intr_type = GPIO_INTR_DISABLE
-      };
-      gpio_config(&io_conf);
+      gpio_reset_pin(LED_PIN);
+      gpio_set_direction(LED_PIN, GPIO_MODE_OUTPUT);
 
       while (1) {
           gpio_set_level(LED_PIN, 1);
-          vTaskDelay(pdMS_TO_TICKS(500));
+          vTaskDelay(1000 / portTICK_PERIOD_MS);
           gpio_set_level(LED_PIN, 0);
-          vTaskDelay(pdMS_TO_TICKS(500));
+          vTaskDelay(1000 / portTICK_PERIOD_MS);
       }
   }
   ```
