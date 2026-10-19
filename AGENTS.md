@@ -38,20 +38,23 @@ Bir projeye veya yeni bir dosyaya başlarken Agent **SADECE** en asgari iskelet 
 
 ## 📂 4. Standart Tekil Proje Klasör Yapısı
 
-Açılan her proje klasörünün kendi içinde mutlaka şu standart yapıyı koruması ZORUNLUDUR:
+Açılan her proje klasörünün kendi içinde mikrodenetleyici üreticisinin resmi standartlarına uygun şu temiz yapıyı koruması ZORUNLUDUR:
 
 ```text
 <proje_klasoru>/
-├── platformio.ini     # PlatformIO donanım ve doğal SDK yapılandırması
-├── README.md          # Projenin amacı, Pin bağlantı tablosu ve öğrenilen kavramlar
-├── src/               # Kaynak kodlar (main.c, main.h)
-└── media/             # Devrenin çalışma anı fotoğrafı veya kısa GIF kaydı
+├── CMakeLists.txt     # Projenin resmi CMake / Build reçetesi
+├── main/              # Kaynak kodlar (main.c, main.h, bileşen CMake)
+│   ├── CMakeLists.txt # Bileşen kütüphane bağlantıları
+│   └── main.c         # Kullanıcının yazdığı saf C kaynak kodu
+├── media/             # Devrenin çalışma anı fotoğrafı veya kısa video kaydı
+├── sdkconfig          # Donanım ve çip yapılandırması (ESP-IDF için)
+└── README.md          # Projenin amacı, Pin bağlantı tablosu ve öğrenilen kavramlar
 ```
 
-* **`platformio.ini`:** Kartın çip, platform ve doğal framework ayarlarını (`framework = espidf`, `framework = stm32cube`, `framework = baremetal`) içerir.
-* **`README.md` (En Son Doldurulur):** Proje başında veya geliştirme esnasında doldurulmaz. Kod yazılıp, devre test edilip proje **tamamen bittikten sonra en son aşamada** doldurulacaktır. Projenin amacını, kullanılan donanım listesini, gerçek pin bağlantı tablosunu, nihai kodları ve derleme/yükleme komutlarını içerir.
-* **`src/`:** Projeye ait kemik kaynak kodları barındırır (`main.c`). Asla `.ino` dosyası içermez.
-* **`media/`:** Kullanıcının devre çalıştığında ekleyeceği fotoğraf (`.JPEG`, `.PNG`) ve hareketli görselleri (`.GIF`) barındırır.
+* **`CMakeLists.txt`:** Projenin ve bileşenlerin derleme reçetesini içerir.
+* **`main/` (veya derleyiciye göre `src/`):** Projeye ait kemik kaynak kodları barındırır (`main.c`). Asla `.ino` dosyası içermez.
+* **`media/`:** Kullanıcının devre çalıştığında ekleyeceği fotoğraf (`.JPEG`, `.PNG`) ve hareketli görselleri (`.GIF`, `.MP4`) barındırır.
+* **`README.md` (En Son Doldurulur):** Proje başında veya geliştirme esnasında doldurulmaz. Kod yazılıp, devre test edilip proje **tamamen bittikten sonra en son aşamada** doldurulacaktır. Projenin amacını, kullanılan donanım listesini, gerçek pin bağlantı tablosunu, nihai kodları ve derleme/yükleme adımlarını içerir.
 
 ---
 
@@ -83,13 +86,13 @@ Kullanıcı aksi yönde özel bir talimat vermediği sürece müfredat **yatay (
 
 Her kart, kendi mikrodenetleyici üreticisinin resmi doğal kütüphaneleri, SDK'sı veya doğrudan bare-metal (register) seviyesinde programlanacaktır. Asla `Arduino.h` dahil edilmeyecektir.
 
-Tüm projelerin derleme ve yükleme süreçleri VS Code içinde **PlatformIO IDE** üzerinden yönetilecek; PlatformIO yalnızca bir inşa yöneticisi (build manager) olarak üreticilerin resmi SDK'larını (`framework = espidf`, `framework = stm32cube`, `framework = baremetal`) çalıştıracaktır.
+Tüm projeler üreticilerin resmi doğal araçları (ESP-IDF, Raspberry Pi Pico SDK, STM32Cube CMake, TI CCS / DriverLib, AVR-GCC) ve doğrudan terminal/CMake komutlarıyla yönetilecektir.
 
 ---
 
 ### 1. ST NUCLEO Serisi (STM32U575, STM32H723, STM32WB55)
 * **Kütüphane:** Resmi **STM32Cube HAL / LL / CMSIS** (`stm32xxxx_hal.h`, `main.h`).
-* **VS Code Ortamı:** **PlatformIO IDE** (`framework = stm32cube` / `framework = cmsis`) veya STM32CubeMX CMake.
+* **Ortam & Araçlar:** **STM32 VS Code Extension** + **STM32CubeMX** + CMake + `arm-none-eabi-gcc`.
 * **Giriş Noktası & Mantık:** Standart C `int main(void)` ve sonsuz `while (1)` döngüsü.
 * **Temel Kavramlar:** Sistem Saat Ağacı (RCC Clock Tree / PLL), GPIO Saat Kapıları (`__HAL_RCC_GPIOx_CLK_ENABLE()`), `GPIO_InitTypeDef` (Pin modu, hızı, pull-up/pull-down).
 * **Örnek Doğal Kod Yapısı:**
@@ -141,7 +144,8 @@ Tüm projelerin derleme ve yükleme süreçleri VS Code içinde **PlatformIO IDE
 
 ### 3. ESP-WROOM-32 (ESP32)
 * **Kütüphane:** Resmi **ESP-IDF (Espressif IoT Development Framework)** (`driver/gpio.h`, `driver/ledc.h`, `freertos/FreeRTOS.h`, `freertos/task.h` vb.).
-* **VS Code Ortamı:** **PlatformIO IDE** (`framework = espidf`).
+* **VS Code Ortamı:** Resmi **Espressif ESP-IDF VS Code Extension** + CMake + Ninja (`idf.py`).
+* **Klasör Yapısı:** Standart ESP-IDF yapısı (`CMakeLists.txt`, `main/main.c`, `main/CMakeLists.txt`).
 * **Giriş Noktası & Mantık:** FreeRTOS başlatıcı girişi `void app_main(void)` ve görev (Task) döngüsü.
 * **Temel Kavramlar:** Çoklu çekirdek (Dual-Core Xtensa), `gpio_reset_pin` & `gpio_set_direction` ile sade pin yönetimi, `vTaskDelay` ile kilitlenmeyen (non-blocking) görev zamanlaması. *(Not: Çoklu pin ve kesme gereken adımlarda `gpio_config_t` struct yapısı kullanılır).*
 * **Örnek Doğal Kod Yapısı (Sade & Temiz Model):**
@@ -170,7 +174,7 @@ Tüm projelerin derleme ve yükleme süreçleri VS Code içinde **PlatformIO IDE
 
 ### 4. CRIUS ALL IN ONE PRO (ATmega2560 - 8-Bit AVR)
 * **Kütüphane:** Saf **AVR-LibC Bare-Metal** (`<avr/io.h>`, `<avr/interrupt.h>`, `<util/delay.h>`).
-* **VS Code Ortamı:** **PlatformIO IDE** (`framework = baremetal` / `avr-gcc`).
+* **Ortam & Araçlar:** **avr-gcc** + **avrdude** + Makefile / Terminal.
 * **Giriş Noktası & Mantık:** Standart C `int main(void)` ve doğrudan donanımsal yazmaçlar.
 * **Temel Kavramlar:** `DDRx` (Yön), `PORTx` (Çıkış/Pull-up), `PINx` (Okuma/Toggle), `TCCRx` (Timer/Sayacı), `OCRx` (Output Compare / PWM).
 * **Örnek Doğal Kod Yapısı:**
@@ -193,7 +197,7 @@ Tüm projelerin derleme ve yükleme süreçleri VS Code içinde **PlatformIO IDE
 
 ### 5. TI LaunchPad Serisi (MSP430F5529, TM4C123GXL Tiva C)
 * **Kütüphane:** Resmi **TI DriverLib / TivaWare / Register** (`msp430.h`, `driverlib/sysctl.h`, `driverlib/gpio.h`).
-* **VS Code Ortamı:** **PlatformIO IDE** (`platform = timsp430` / `platform = titiva`).
+* **Ortam & Araçlar:** **TI Code Composer Studio (CCS)** veya Makefile + `msp430-gcc` / `arm-none-eabi-gcc`.
 * **Giriş Noktası & Mantık:** Standart C `int main(void)`.
 * **Temel Kavramlar:** Watchdog Timer durdurma (`WDTCTL = WDTPW | WDTHOLD`), TivaWare PLL saat yapılandırması, periferik saat etkinleştirme.
 * **Örnek Doğal Kod Yapısı (MSP430 Register):**
