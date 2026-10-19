@@ -9,8 +9,9 @@ Bu dosya, bu repoda çalışan tüm yapay zeka asistanları (Agent) için bağla
 Kullanıcı gömülü sistemleri uygulamalı olarak öğrenmektedir. Kodun tamamının agent tarafından yazılması öğrenme sürecini engeller.
 
 ### ⛔ KESİNLİKLE YASAK OLANLAR:
-1. **İç mantığı ve algoritmaları doğrudan yazmak yasaktır:** `loop()` içi, `for`/`while` döngüleri, matematiksel hesaplamalar ve lojik algoritmalar asla kullanıcı istemeden doldurulmayacaktır.
+1. **İç mantığı ve algoritmaları doğrudan yazmak yasaktır:** `loop()`/`while(1)` içi, `for`/`while` döngüleri, matematiksel hesaplamalar ve lojik algoritmalar asla kullanıcı istemeden doldurulmayacaktır.
 2. **Kullanıcının yerine kodu tamamlayıp yüklemek yasaktır.**
+3. **`Arduino.h` ve Arduino soyutlama kütüphanelerini kullanmak KESİNLİKLE YASAKTIR:** Hiçbir projede `Arduino.h`, `pinMode`, `digitalWrite`, `analogWrite`, `delay` gibi Arduino framework bileşenleri kullanılmayacaktır. Her kart kendi üreticisinin resmi SDK'sı veya saf register seviyesiyle kodlanacaktır.
 
 ---
 
@@ -18,12 +19,12 @@ Kullanıcı gömülü sistemleri uygulamalı olarak öğrenmektedir. Kodun tamam
 
 Bir projeye veya yeni bir dosyaya başlarken Agent **SADECE** en asgari iskelet (kemik) yapıyı oluşturur:
 
-1. **Gerekli Kütüphaneler:** Yalnızca projeye özel `#include` satırları.
-2. **Pin Tanımlamaları KULLANICIYA AİTTİR:** Agent pin numaralarını doğrudan yazmaz. Yalnızca nereye yazılacağını gösteren `// TODO: Pin tanımlamalarını yap` yorumunu bırakır. Donanım şemasına göre pinleri kullanıcı tanımlar.
+1. **Gerekli Kütüphaneler:** Yalnızca karta ve çevre birime özel doğal `#include` satırları (örn. `stm32u5xx_hal.h`, `pico/stdlib.h`, `avr/io.h`, `driver/gpio.h`).
+2. **Pin Tanımlamaları KULLANICIYA AİTTİR:** Agent pin numaralarını veya register maskelerini doğrudan yazmaz. Yalnızca nereye yazılacağını gösteren `// TODO: Pin tanımlamalarını yap` yorumunu bırakır.
 3. **Boş Fonksiyon İskeletleri:**
-   - `void setup() { // TODO: Pin modlarını ayarla }` (İçi boş)
-   - `void loop() { // TODO: Algoritmayı kur }` (İçi boş)
-   - Varsa özel yardımcı fonksiyonların sadece boş imzaları.
+   - Standart C giriş noktası (`int main(void) { // TODO: Saat ve pin ayarları; while(1) { // TODO: Algoritma } }`)
+   - ESP-IDF projelerinde `void app_main(void)`
+   - Varsa özel fonksiyon veya kesme (ISR) fonksiyonlarının sadece boş imzaları.
 
 ---
 
@@ -74,5 +75,24 @@ Kullanıcı aksi yönde özel bir talimat vermediği sürece müfredat **yatay (
 
 > **Agent Davranışı:** Bir proje bittiğinde Agent, sıradaki proje önerisini daima bu yatay kurala göre sunar. Kullanıcı aksini talep etmediği sürece dikey olarak aynı kartın sonraki seviyesine geçiş önermez.
 
+---
 
+## 🏛️ 7. Donanıma Özgü Doğal Ekosistem ve Kütüphane Kuralı (Native Ecosystem Only)
 
+Her kart, kendi mikrodenetleyici üreticisinin resmi doğal kütüphaneleri, SDK'sı veya doğrudan bare-metal (register) seviyesinde programlanacaktır. Asla `Arduino.h` dahil edilmeyecektir:
+
+1. **ST NUCLEO Serisi (STM32U575, STM32H723, STM32WB55):**
+   - **Kütüphane:** Resmi **STM32Cube HAL / LL / CMSIS** (`stm32xxxx_hal.h`, `main.h`).
+   - **Giriş Noktası:** Standart C `int main(void)` ve sonsuz `while (1)` döngüsü.
+2. **Raspberry Pi Pico 2 W (RP2350):**
+   - **Kütüphane:** Resmi **Raspberry Pi Pico C/C++ SDK** (`pico/stdlib.h`, `hardware/gpio.h`, `hardware/pwm.h` vb.).
+   - **Giriş Noktası:** `int main(void)` ve `stdio_init_all()`.
+3. **ESP-WROOM-32 (ESP32):**
+   - **Kütüphane:** Resmi **ESP-IDF** (`driver/gpio.h`, `driver/ledc.h`, `freertos/FreeRTOS.h` vb.).
+   - **Giriş Noktası:** `void app_main(void)`.
+4. **CRIUS ALL IN ONE PRO (ATmega2560 - 8-Bit AVR):**
+   - **Kütüphane:** Saf **AVR-LibC Bare-Metal** (`<avr/io.h>`, `<avr/interrupt.h>`, `<util/delay.h>`).
+   - **Giriş Noktası:** `int main(void)` ve donanımsal yazmaçlar (`DDRx`, `PORTx`, `TCCRx`).
+5. **TI LaunchPad Serisi (MSP430F5529, TM4C123GXL Tiva C):**
+   - **Kütüphane:** Resmi **TI DriverLib / TivaWare / Register** (`msp430.h`, `driverlib/sysctl.h`, `driverlib/gpio.h`).
+   - **Giriş Noktası:** `int main(void)`.
