@@ -16,12 +16,12 @@ Laboratuvar envanterindeki **11 geliştirme kartının** her biri için **4 Baş
 > - **P3:** Analog Giriş / ADC (Potansiyometre veya Tek Sensör Okuma)
 > - **P4:** Temel İletişim & Ekran (I2C ve 0.91" OLED Göstergesi)
 
-Her kartta önce `P1 (Blink & Buton)` ile derleyici/yükleyici doğrulaması yapılır, ardından yatay olarak `P2..P12` projelerine geçilir. Tamamlanan projelerin üzerindeki ✅ işaretine tıklayarak ilgili proje klasörüne gidebilirsiniz:
+Laboratuvarda **Dikey (Kart Bazlı) İlerleme Modeli** izlenmektedir. İlk olarak **ESP-WROOM-32** platformunda yerel ESP-IDF ile `P1..P12` projeleri sırasıyla tamamlanacak, ardından sıradaki karta geçilecektir. Tamamlanan projelerin üzerindeki ✅ işaretine tıklayarak ilgili proje klasörüne gidebilirsiniz:
 
 | # | Geliştirme Kartı | Mimari / Çekirdek | P1 (Blink) | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10 | P11 | P12 |
 | :-: | :--- | :--- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | **01** | **ESP-WROOM-32** | Dual Xtensa LX6 (240 MHz, Wi-Fi/BLE) | [✅](01_ESP_WROOM_32/01_beginner/01_led_blink_and_boot_button/) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **02** | **Raspberry Pi Pico 2 W** | RP2350 (Dual Cortex-M33 / RISC-V + PIO) | [✅](02_RPi_Pico_2_W/01_beginner/01_led_blink_cyw43_and_gpio/) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **02** | **Raspberry Pi Pico 2 W** | RP2350 (Dual Cortex-M33 / RISC-V + PIO) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **03** | **CRIUS ALL IN ONE PRO** | 8-Bit AVR ATmega2560 (Flight Controller) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **04** | **TI MSP-EXP430G2** | 16-Bit Ultra-Low-Power RISC (512B RAM) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **05** | **TI MSP430F5529 LP** | 16-Bit RISC (25 MHz, DMA, USB, 12-Bit ADC) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
