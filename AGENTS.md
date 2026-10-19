@@ -79,20 +79,136 @@ Kullanıcı aksi yönde özel bir talimat vermediği sürece müfredat **yatay (
 
 ## 🏛️ 7. Donanıma Özgü Doğal Ekosistem ve Kütüphane Kuralı (Native Ecosystem Only)
 
-Her kart, kendi mikrodenetleyici üreticisinin resmi doğal kütüphaneleri, SDK'sı veya doğrudan bare-metal (register) seviyesinde programlanacaktır. Asla `Arduino.h` dahil edilmeyecektir:
+Her kart, kendi mikrodenetleyici üreticisinin resmi doğal kütüphaneleri, SDK'sı veya doğrudan bare-metal (register) seviyesinde programlanacaktır. Asla `Arduino.h` dahil edilmeyecektir.
 
-1. **ST NUCLEO Serisi (STM32U575, STM32H723, STM32WB55):**
-   - **Kütüphane:** Resmi **STM32Cube HAL / LL / CMSIS** (`stm32xxxx_hal.h`, `main.h`).
-   - **Giriş Noktası:** Standart C `int main(void)` ve sonsuz `while (1)` döngüsü.
-2. **Raspberry Pi Pico 2 W (RP2350):**
-   - **Kütüphane:** Resmi **Raspberry Pi Pico C/C++ SDK** (`pico/stdlib.h`, `hardware/gpio.h`, `hardware/pwm.h` vb.).
-   - **Giriş Noktası:** `int main(void)` ve `stdio_init_all()`.
-3. **ESP-WROOM-32 (ESP32):**
-   - **Kütüphane:** Resmi **ESP-IDF** (`driver/gpio.h`, `driver/ledc.h`, `freertos/FreeRTOS.h` vb.).
-   - **Giriş Noktası:** `void app_main(void)`.
-4. **CRIUS ALL IN ONE PRO (ATmega2560 - 8-Bit AVR):**
-   - **Kütüphane:** Saf **AVR-LibC Bare-Metal** (`<avr/io.h>`, `<avr/interrupt.h>`, `<util/delay.h>`).
-   - **Giriş Noktası:** `int main(void)` ve donanımsal yazmaçlar (`DDRx`, `PORTx`, `TCCRx`).
-5. **TI LaunchPad Serisi (MSP430F5529, TM4C123GXL Tiva C):**
-   - **Kütüphane:** Resmi **TI DriverLib / TivaWare / Register** (`msp430.h`, `driverlib/sysctl.h`, `driverlib/gpio.h`).
-   - **Giriş Noktası:** `int main(void)`.
+---
+
+### 1. ST NUCLEO Serisi (STM32U575, STM32H723, STM32WB55)
+* **Kütüphane:** Resmi **STM32Cube HAL / LL / CMSIS** (`stm32xxxx_hal.h`, `main.h`).
+* **VS Code Ortamı:** STM32CubeMX ile `CMake` formatında kod üretimi + **STM32 VS Code Extension** veya saf `arm-none-eabi-gcc`.
+* **Giriş Noktası & Mantık:** Standart C `int main(void)` ve sonsuz `while (1)` döngüsü.
+* **Temel Kavramlar:** Sistem Saat Ağacı (RCC Clock Tree / PLL), GPIO Saat Kapıları (`__HAL_RCC_GPIOx_CLK_ENABLE()`), `GPIO_InitTypeDef` (Pin modu, hızı, pull-up/pull-down).
+* **Örnek Doğal Kod Yapısı:**
+  ```c
+  #include "main.h"
+
+  int main(void) {
+      HAL_Init();
+      SystemClock_Config();
+      MX_GPIO_Init(); // Saat açma ve GPIO_InitStruct ayarları burada yapılır
+
+      while (1) {
+          HAL_GPIO_TogglePin(LED_PORT, LED_PIN);
+          HAL_Delay(500);
+      }
+  }
+  ```
+
+---
+
+### 2. Raspberry Pi Pico 2 W (RP2350)
+* **Kütüphane:** Resmi **Raspberry Pi Pico C/C++ SDK** (`pico/stdlib.h`, `hardware/gpio.h`, `hardware/pwm.h`, `hardware/adc.h` vb.).
+* **VS Code Ortamı:** **Raspberry Pi Pico VS Code Extension** + CMake + `arm-none-eabi-gcc` + `picotool`.
+* **Giriş Noktası & Mantık:** Standart C `int main(void)`, `stdio_init_all()` ve `while (1)`.
+* **Temel Kavramlar:** SIO (Single-Cycle I/O) donanım veriyolu, donanımsal Timer alarmları, PIO (Programmable I/O) durum makineleri.
+* **Örnek Doğal Kod Yapısı:**
+  ```c
+  #include "pico/stdlib.h"
+  #include "hardware/gpio.h"
+
+  #define LED_PIN 15
+
+  int main(void) {
+      stdio_init_all();
+      gpio_init(LED_PIN);
+      gpio_set_dir(LED_PIN, GPIO_OUT);
+
+      while (1) {
+          gpio_put(LED_PIN, 1);
+          sleep_ms(500);
+          gpio_put(LED_PIN, 0);
+          sleep_ms(500);
+      }
+      return 0;
+  }
+  ```
+
+---
+
+### 3. ESP-WROOM-32 (ESP32)
+* **Kütüphane:** Resmi **ESP-IDF (Espressif IoT Development Framework)** (`driver/gpio.h`, `driver/ledc.h`, `freertos/FreeRTOS.h`, `freertos/task.h` vb.).
+* **VS Code Ortamı:** **PlatformIO IDE** (`framework = espidf`) veya resmi **ESP-IDF VS Code Extension**.
+* **Giriş Noktası & Mantık:** FreeRTOS başlatıcı girişi `void app_main(void)` ve görev (Task) döngüsü.
+* **Temel Kavramlar:** Çoklu çekirdek (Dual-Core Xtensa), `gpio_config_t` yapılandırma struct'ı, `vTaskDelay` ile kilitlenmeyen (non-blocking) görev zamanlaması.
+* **Örnek Doğal Kod Yapısı:**
+  ```c
+  #include "freertos/FreeRTOS.h"
+  #include "freertos/task.h"
+  #include "driver/gpio.h"
+
+  #define LED_PIN GPIO_NUM_2
+
+  void app_main(void) {
+      gpio_config_t io_conf = {
+          .pin_bit_mask = (1ULL << LED_PIN),
+          .mode = GPIO_MODE_OUTPUT,
+          .pull_up_en = GPIO_PULLUP_DISABLE,
+          .pull_down_en = GPIO_PULLDOWN_DISABLE,
+          .intr_type = GPIO_INTR_DISABLE
+      };
+      gpio_config(&io_conf);
+
+      while (1) {
+          gpio_set_level(LED_PIN, 1);
+          vTaskDelay(pdMS_TO_TICKS(500));
+          gpio_set_level(LED_PIN, 0);
+          vTaskDelay(pdMS_TO_TICKS(500));
+      }
+  }
+  ```
+
+---
+
+### 4. CRIUS ALL IN ONE PRO (ATmega2560 - 8-Bit AVR)
+* **Kütüphane:** Saf **AVR-LibC Bare-Metal** (`<avr/io.h>`, `<avr/interrupt.h>`, `<util/delay.h>`).
+* **VS Code Ortamı:** **PlatformIO IDE** (`framework = baremetal` / `avr-gcc`).
+* **Giriş Noktası & Mantık:** Standart C `int main(void)` ve doğrudan donanımsal yazmaçlar.
+* **Temel Kavramlar:** `DDRx` (Yön), `PORTx` (Çıkış/Pull-up), `PINx` (Okuma/Toggle), `TCCRx` (Timer/Sayacı), `OCRx` (Output Compare / PWM).
+* **Örnek Doğal Kod Yapısı:**
+  ```c
+  #include <avr/io.h>
+  #include <util/delay.h>
+
+  int main(void) {
+      DDRB |= (1 << PB7); // Pin 13 çıkış yap (DDRB bit 7 = 1)
+
+      while (1) {
+          PORTB ^= (1 << PB7); // Durumu tersle (XOR)
+          _delay_ms(500);
+      }
+      return 0;
+  }
+  ```
+
+---
+
+### 5. TI LaunchPad Serisi (MSP430F5529, TM4C123GXL Tiva C)
+* **Kütüphane:** Resmi **TI DriverLib / TivaWare / Register** (`msp430.h`, `driverlib/sysctl.h`, `driverlib/gpio.h`).
+* **VS Code Ortamı:** **PlatformIO IDE** (`platform = timsp430` / `platform = titiva`).
+* **Giriş Noktası & Mantık:** Standart C `int main(void)`.
+* **Temel Kavramlar:** Watchdog Timer durdurma (`WDTCTL = WDTPW | WDTHOLD`), TivaWare PLL saat yapılandırması, periferik saat etkinleştirme.
+* **Örnek Doğal Kod Yapısı (MSP430 Register):**
+  ```c
+  #include <msp430.h>
+
+  int main(void) {
+      WDTCTL = WDTPW | WDTHOLD; // Watchdog Timer'ı durdur
+      P1DIR |= BIT0;            // P1.0 çıkış
+
+      while (1) {
+          P1OUT ^= BIT0;
+          __delay_cycles(500000);
+      }
+  }
+  ```
+
