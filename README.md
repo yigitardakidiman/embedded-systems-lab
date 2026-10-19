@@ -20,15 +20,15 @@ Her kartta önce `P1 (Blink & Buton)` ile derleyici/yükleyici doğrulaması yap
 
 | # | Geliştirme Kartı | Mimari / Çekirdek | P1 (Blink) | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10 | P11 | P12 |
 | :-: | :--- | :--- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| **01** | **ESP-WROOM-32** | Dual Xtensa LX6 (240 MHz, Wi-Fi/BLE) | [✅](01_ESP_WROOM_32/01_beginner/01_led_blink_and_boot_button/) | [✅](01_ESP_WROOM_32/01_beginner/02_capacitive_touch_led_bar/) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **02** | **Raspberry Pi Pico 2 W** | RP2350 (Dual Cortex-M33 / RISC-V + PIO) | [✅](02_RPi_Pico_2_W/01_beginner/01_led_blink_cyw43_and_gpio/) | [✅](02_RPi_Pico_2_W/01_beginner/02_pwm_slice_breathe_led/) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **03** | **CRIUS ALL IN ONE PRO** | 8-Bit AVR ATmega2560 (Flight Controller) | [✅](03_CRIUS_ATmega2560/01_beginner/01_avr_register_blink_timer1/) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **01** | **ESP-WROOM-32** | Dual Xtensa LX6 (240 MHz, Wi-Fi/BLE) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **02** | **Raspberry Pi Pico 2 W** | RP2350 (Dual Cortex-M33 / RISC-V + PIO) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **03** | **CRIUS ALL IN ONE PRO** | 8-Bit AVR ATmega2560 (Flight Controller) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **04** | **TI MSP-EXP430G2** | 16-Bit Ultra-Low-Power RISC (512B RAM) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **05** | **TI MSP430F5529 LP** | 16-Bit RISC (25 MHz, DMA, USB, 12-Bit ADC) | [✅](05_TI_MSP430F5529_LP/01_beginner/01_ucs_25mhz_dual_port_blink/) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **06** | **TI EK-TM4C123GXL** | 32-Bit ARM Cortex-M4F (80 MHz, FPU, NVIC) | [✅](06_TI_TM4C123GXL_TivaC/01_beginner/01_rgb_blink_bitbanding_pf0_unlock/) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **07** | **ST NUCLEO-U575ZI-Q** | 32-Bit ARM Cortex-M33 (ULP, SMPS, TrustZone) | [✅](07_ST_NUCLEO_U575ZI_Q/01_beginner/01_smps_power_and_bsrr_blink/) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **08** | **ST P-NUCLEO-WB55** | Dual ARM Cortex-M4 + Cortex-M0+ (BLE 5.0) | [✅](08_ST_P_NUCLEO_WB55/01_beginner/01_dual_core_hsem_and_dongle_blink/) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **09** | **ST NUCLEO-H723ZG** | 32-Bit ARM Cortex-M7 (550 MHz, Double FPU, DSP) | [✅](09_ST_NUCLEO_H723ZG/01_beginner/01_m7_550mhz_dcache_clean_blink/) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **05** | **TI MSP430F5529 LP** | 16-Bit RISC (25 MHz, DMA, USB, 12-Bit ADC) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **06** | **TI EK-TM4C123GXL** | 32-Bit ARM Cortex-M4F (80 MHz, FPU, NVIC) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **07** | **ST NUCLEO-U575ZI-Q** | 32-Bit ARM Cortex-M33 (ULP, SMPS, TrustZone) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **08** | **ST P-NUCLEO-WB55** | Dual ARM Cortex-M4 + Cortex-M0+ (BLE 5.0) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **09** | **ST NUCLEO-H723ZG** | 32-Bit ARM Cortex-M7 (550 MHz, Double FPU, DSP) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **10** | **Raspberry Pi Zero W** | ARM11 BCM2835 (1 GHz, Embedded Linux) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **11** | **Tang Nano 9K FPGA** | Gowin GW1NR-9 FPGA (8640 LUT, Verilog) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 

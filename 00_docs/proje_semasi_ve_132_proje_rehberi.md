@@ -57,15 +57,15 @@ Her kartta önce `P1 (Blink)` tamamlanacak, ardından yatay veya aile bazlı ola
 
 | # | Geliştirme Kartı | P1 (Blink) | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10 | P11 | P12 |
 | :-: | :--- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| **01** | **ESP-WROOM-32** | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **02** | **Raspberry Pi Pico 2 W** | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **03** | **CRIUS ALL IN ONE PRO** | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **01** | **ESP-WROOM-32** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **02** | **Raspberry Pi Pico 2 W** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **03** | **CRIUS ALL IN ONE PRO** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **04** | **TI MSP-EXP430G2** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **05** | **TI MSP430F5529 LP** | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **06** | **TI EK-TM4C123GXL** | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **07** | **ST NUCLEO-U575ZI-Q** | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **08** | **ST P-NUCLEO-WB55** | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **09** | **ST NUCLEO-H723ZG** | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **05** | **TI MSP430F5529 LP** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **06** | **TI EK-TM4C123GXL** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **07** | **ST NUCLEO-U575ZI-Q** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **08** | **ST P-NUCLEO-WB55** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **09** | **ST NUCLEO-H723ZG** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **10** | **Raspberry Pi Zero W** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **11** | **Tang Nano 9K FPGA** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 
@@ -111,9 +111,9 @@ Her kartta önce `P1 (Blink)` tamamlanacak, ardından yatay veya aile bazlı ola
 **Odak Noktası:** IoT protokolleri, Çift Çekirdekli FreeRTOS görev yönetimi, Wi-Fi/BLE ve dahili analog/kapasitif çevrebirimler.
 
 #### 🟢 Başlangıç Seviyesi (`01_beginner/`) — Temel Yapı Taşları
-1. **`01_led_blink_and_boot_button`** — **[TAMAMLANDI ✅] Blink & Toolchain Doğrulaması (Harici LED & BOOT Butonu)**
+1. **`01_led_blink_and_boot_button`** — **Blink & Toolchain Doğrulaması (Harici LED & BOOT Butonu)**
    - *Kavram:* Dijital çıkış (`OUTPUT`) ile LED sürme, `INPUT_PULLUP` ile `BOOT` butonunu okuma, Active-Low mantığı ve `arduino-cli` derleme/yükleme hattını doğrulama.
-2. **`02_capacitive_touch_led_bar`** — **[TAMAMLANDI ✅] Dahili Kapasitif Dokunmatik Sensör ve Gösterge LED'i (`T0 / GPIO 4`, Harici Mavi LED)**
+2. **`02_capacitive_touch_led_bar`** — **Dahili Kapasitif Dokunmatik Sensör ve Gösterge LED'i (`T0 / GPIO 4`, Harici Mavi LED)**
    - *Kavram:* ESP32'nin dahili kapasitif algılayıcısını (`touchRead()`) tanıma, parmak temasıyla kapasitans değişimini algılayıp dinamik eşik kalibrasyonuyla LED kontrolü sağlama.
 3. **`03_ledc_pwm_breathe_led`** — **LEDC Donanım PWM ile LED Parlaklık ve Nefes Alma Efekti (`GPIO 16/25`, Renkli LED)**
    - *Kavram:* `delay()` ile işlemciyi kitlemeden donanımsal `ledc` modülü ile PWM sinyali üretme; LED parlaklığını kademeli artırıp azaltarak (Fade/Breathe) analog çıkış mantığını kavrama.
@@ -146,9 +146,9 @@ Her kartta önce `P1 (Blink)` tamamlanacak, ardından yatay veya aile bazlı ola
 **Odak Noktası:** RP2350'nin benzersiz **PIO (Programmable I/O)** durum makineleri, hem ARM Cortex-M33 hem Hazard3 RISC-V çekirdeklerini deneyimleme ve DMA zincirleme.
 
 #### 🟢 Başlangıç Seviyesi (`01_beginner/`) — Temel Yapı Taşları
-1. **`01_led_blink_cyw43_and_gpio`** — **[TAMAMLANDI ✅] Blink & CYW43 Yardımcı Çip Mimarisi (`CYW43_WL_GPIO_LED_PIN` & Harici LED)**
+1. **`01_led_blink_cyw43_and_gpio`** — **Blink & CYW43 Yardımcı Çip Mimarisi (`CYW43_WL_GPIO_LED_PIN` & Harici LED)**
    - *Kavram:* Pico 2 W üzerindeki dahili LED'in Wi-Fi çipine (`CYW43439`) bağlı olduğunu anlama, harici GPIO üzerinden LED sürme ve temel dijital çıkış mantığı.
-2. **`02_pwm_slice_breathe_led`** — **[TAMAMLANDI ✅] Donanım PWM Dilimleri (PWM Slices) ile LED Nefes Alma Efekti (Harici Renkli LED)**
+2. **`02_pwm_slice_breathe_led`** — **Donanım PWM Dilimleri (PWM Slices) ile LED Nefes Alma Efekti (Harici Renkli LED)**
    - *Kavram:* Motor veya harici sürücülere girmeden; RP2350'nin donanımsal PWM dilimlerini (PWM slices) kullanarak tek bir LED'in parlaklığını yumuşakça kısıp açma (Fade In / Fade Out).
 3. **`03_adc_sound_level_monitor`** — **ADC ile Analog Giriş Okuma ve Ses/Voltaj Seviyesi Göstergesi (`MAX4466` veya Dahili Sıcaklık Sensörü, LED)**
    - *Kavram:* RP2350'nin 12-bit ADC kanalı ile analog voltaj okuma, Serial Monitor'de ham veriyi izleme ve belirlenen eşik değere göre durum LED'ini yakma.
@@ -181,7 +181,7 @@ Her kartta önce `P1 (Blink)` tamamlanacak, ardından yatay veya aile bazlı ola
 **Odak Noktası:** 8-bit AVR mimarisi (`DDRx`, `PORTx`, `TCNTx`, `TWI`), kart üzerinde **yerleşik `MPU6050`, `HMC5883L` (Pusula) ve `MS5611` (Hassas Barometre)** sensörleri ve uçuş kontrol algoritmaları.
 
 #### 🟢 Başlangıç Seviyesi (`01_beginner/`) — Temel Yapı Taşları
-1. **`01_avr_register_blink_timer1`** — **[TAMAMLANDI ✅] 8-Bit AVR Register Blink & Timer1 CTC Kesmesi**
+1. **`01_avr_register_blink_timer1`** — **8-Bit AVR Register Blink & Timer1 CTC Kesmesi**
    - *Kavram:* `DDRB` ve `PINB` yazmaçlarıyla bare-metal pin kontrolü, 16-bit Timer1 CTC kesmesiyle arka plan durum flaşörü ve GPIO toggling mantığını anlama.
 2. **`02_timer_fast_pwm_led_dimmer`** — **Timer Fast-PWM ile LED Karartma / Dimmer (Harici LED)**
    - *Kavram:* ATmega2560 donanımsal Timer Fast-PWM modunu (`OCRnA/B` yazmaçları) kullanarak işlemci döngüsünü meşgul etmeden harici LED'in parlaklığını kademeli kontrol etme.
@@ -251,7 +251,7 @@ Her kartta önce `P1 (Blink)` tamamlanacak, ardından yatay veya aile bazlı ola
 **Odak Noktası:** Gelişmiş UCS (Unified Clock System), 3 kanallı DMA, 12-bit `ADC12_A`, donanım çarpanı `MPY32` ve çip içi **Full-Speed USB 2.0** donanımı.
 
 #### 🟢 Başlangıç Seviyesi (`01_beginner/`) — Temel Yapı Taşları
-1. **`01_ucs_25mhz_dual_port_blink`** — **[TAMAMLANDI ✅] Blink & UCS 25 MHz Doğrulaması (Dahili `P1.0` Kırmızı, `P4.7` Yeşil LED)**
+1. **`01_ucs_25mhz_dual_port_blink`** — **Blink & UCS 25 MHz Doğrulaması (Dahili `P1.0` Kırmızı, `P4.7` Yeşil LED)**
    - *Kavram:* `PMM` çekirdek voltajı ve UCS ile MCLK saatini 25 MHz'e çıkarma; Timer kesmeleriyle poliritmik LED Blink yapma.
 2. **`02_timerb_pwm_led_fade`** — **Timer_B Donanımsal PWM ile LED Nefes Alma Efekti (Harici Renkli LED)**
    - *Kavram:* Motor veya karmaşık sürücüler olmadan, `Timer_B` modülünü kullanarak pürüzsüz donanımsal PWM üretme ve LED parlaklığını nefes alma efektiyle kontrol etme.
@@ -286,7 +286,7 @@ Her kartta önce `P1 (Blink)` tamamlanacak, ardından yatay veya aile bazlı ola
 **Odak Noktası:** ARM Cortex-M4F mimarisi (NVIC kesme öncelikleri, SysTick, Bit-Banding), Motion Control PWM modülleri ve çift 12-bit ADC (Sample Sequencer yapısı).
 
 #### 🟢 Başlangıç Seviyesi (`01_beginner/`) — Temel Yapı Taşları
-1. **`01_rgb_blink_bitbanding_pf0_unlock`** — **[TAMAMLANDI ✅] 7-Renkli RGB Blink, Bit-Banding ve PF0 Kilidi Açma**
+1. **`01_rgb_blink_bitbanding_pf0_unlock`** — **7-Renkli RGB Blink, Bit-Banding ve PF0 Kilidi Açma**
    - *Kavram:* `PF0 (SW2)` pininin NMI kilidini açma; Cortex-M4 Bit-Banding adreslemesi ve SysTick kesmesiyle dahili RGB LED'de temel Blink yapma.
 2. **`02_pwm_rgb_breathe_color_mixing`** — **Donanım PWM ile RGB LED Nefes Alma ve Renk Karışımı (Dahili RGB LED)**
    - *Kavram:* Donanımsal PWM modülünü kullanarak Kırmızı, Yeşil ve Mavi kanalların doluluk oranını (Duty Cycle) bağımsız değiştirip renk geçişleri (Color Fading) yapma.
@@ -321,7 +321,7 @@ Her kartta önce `P1 (Blink)` tamamlanacak, ardından yatay veya aile bazlı ola
 **Odak Noktası:** Ultra-Low-Power (`STOP 0/1/2/3`, `STANDBY`), dahili SMPS (`-Q` serisi), **LPBAM** (CPU uyurken DMA ve çevrebirimlerin otonom çalışması), CORDIC/FMAC ve ARM **TrustZone**.
 
 #### 🟢 Başlangıç Seviyesi (`01_beginner/`) — Temel Yapı Taşları
-1. **`01_smps_power_and_bsrr_blink`** — **[TAMAMLANDI ✅] Blink & SMPS Güç Modu Doğrulaması (Dahili `LD1/LD2/LD3`, `B1` Butonu)**
+1. **`01_smps_power_and_bsrr_blink`** — **Blink & SMPS Güç Modu Doğrulaması (Dahili `LD1/LD2/LD3`, `B1` Butonu)**
    - *Kavram:* Dahili SMPS regülatörünü aktif ederek `GPIOx_BSRR` atomik yazmacıyla Blink yapma, butonu okuma ve `LPUART1` konsol çıkışını doğrulama.
 2. **`02_timer_pwm_breathe_led`** — **Donanım Timer PWM ile LED Nefes Alma Efekti (Harici Renkli LED)**
    - *Kavram:* STM32 Timer donanımını kullanarak işlemciyi yormadan PWM sinyali üretme ve LED parlaklığını yumuşakça değiştirme.
@@ -356,7 +356,7 @@ Her kartta önce `P1 (Blink)` tamamlanacak, ardından yatay veya aile bazlı ola
 **Odak Noktası:** Cortex-M0+ radyo çekirdeği (BLE 5.0, Zigbee, 802.15.4), Cortex-M4 uygulama çekirdeği, çekirdekler arası **IPCC / HSEM** haberleşmesi ve paket içindeki **USB Dongle** ile çift taraflı kablosuz ağ kurma.
 
 #### 🟢 Başlangıç Seviyesi (`01_beginner/`) — Temel Yapı Taşları
-1. **`01_dual_core_hsem_and_dongle_blink`** — **[TAMAMLANDI ✅] Dual-Core Blink & HSEM Doğrulaması (Nucleo & USB Dongle LED)**
+1. **`01_dual_core_hsem_and_dongle_blink`** — **Dual-Core Blink & HSEM Doğrulaması (Nucleo & USB Dongle LED)**
    - *Kavram:* Donanım semaforlarını (`HSEM`) ve çift çekirdekli mimaride GPIO erişimini doğrulama; harici LED üzerinde temel Blink yapma.
 2. **`02_timer_pwm_breathe_led`** — **Timer PWM ile LED Parlaklık ve Nefes Alma Efekti (Harici Renkli LED)**
    - *Kavram:* Donanımsal Timer PWM kanalı kullanarak harici LED'in parlaklığını nefes alma (Fade) efektiyle pürüzsüz kontrol etme.
@@ -391,7 +391,7 @@ Her kartta önce `P1 (Blink)` tamamlanacak, ardından yatay veya aile bazlı ola
 **Odak Noktası:** 550 MHz hız, Çift Hassasiyetli FPU, ARM CMSIS-DSP kütüphanesi, Önbellek (I-Cache / D-Cache) tutarlılığı, gelişmiş DMA (MDMA/BDMA) ve yüksek hızlı sinyal işleme.
 
 #### 🟢 Başlangıç Seviyesi (`01_beginner/`) — Temel Yapı Taşları
-1. **`01_550mhz_pll_and_dwt_cycle_blink`** — **[TAMAMLANDI ✅] Blink & 550 MHz Mimari Doğrulaması (Dahili LD1/LD2/LD3)**
+1. **`01_550mhz_pll_and_dwt_cycle_blink`** — **Blink & 550 MHz Mimari Doğrulaması (Dahili LD1/LD2/LD3)**
    - *Kavram:* 550 MHz Cortex-M7 mimarisinde D-Cache ve saat ağacını yapılandırarak atomik GPIO çıkışı ve temel Blink kontrolü.
 2. **`02_timer_pwm_breathe_led`** — **550 MHz Timer PWM ile LED Nefes Alma Efekti (Harici Renkli LED)**
    - *Kavram:* Yüksek hızlı timer çevrebirimini kullanarak donanımsal PWM üretme ve LED parlaklığını nefes alma efektiyle yumuşakça kontrol etme.
