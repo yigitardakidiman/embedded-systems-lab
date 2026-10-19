@@ -62,23 +62,21 @@ Açılan her proje klasörünün kendi içinde mikrodenetleyici üreticisinin re
 
 Bir proje kodlanıp, devresi test edilip başarıyla tamamlandığında Agent aşağıdaki iki dokümantasyon dosyasını ZORUNLU olarak güncelleyecektir:
 
-1. **Ana Vitrin [`README.md`](file:///c:/Users/PC/Desktop/Kıdıman/embedded-systems-lab/README.md):** 
+1. **Ana Vitrin [`README.md`](file:///c:/Users/PC/Desktop/kidiman/embedded-systems-lab/README.md):** 
    - İlerleme matrisindeki ilgili kutucuğu `[✅](proje_yolu/)` olarak işaretleyip proje klasörüne link verir.
-2. **Rehber Doküman [`00_docs/proje_semasi_ve_132_proje_rehberi.md`](file:///c:/Users/PC/Desktop/Kıdıman/embedded-systems-lab/00_docs/proje_semasi_ve_132_proje_rehberi.md):**
+2. **Rehber Doküman [`00_docs/proje_semasi_ve_132_proje_rehberi.md`](file:///c:/Users/PC/Desktop/kidiman/embedded-systems-lab/00_docs/proje_semasi_ve_132_proje_rehberi.md):**
    - Bölüm 2'deki İlerleme Matrisinde ilgili kartın projesini `✅` yapar.
    - İlgili kartın altındaki proje başlığını `**[TAMAMLANDI ✅]**` olarak günceller.
 
 ---
 
-## 🧭 6. İlerleme Sırası Kuralı (Yatay / Kademeli İlerleme Modeli)
+## 🧭 6. İlerleme Modeli: Dikey İlerleme (Kart Bazlı Derinleşme Modeli)
 
-Kullanıcı aksi yönde özel bir talimat vermediği sürece müfredat **yatay (horizontal)** ilerleme sırasını izleyecektir:
+Farklı mikrodenetleyici ekosistemleri arasında sürekli geçiş yapmanın getirdiği zihinsel yorgunluğu ve bağlam değiştirme (context-switching) maliyetini önlemek amacıyla müfredat **dikey (kart bazlı)** ilerleyecektir:
 
-1. **Önce tüm kartların `P1` projeleri tamamlanacaktır:** Geliştirme kartlarının toolchain doğrulaması ve temel dijital G/Ç adımı bitirilir.
-2. **Ardından tüm kartların `P2` projeleri tamamlanacaktır:** PWM / analog çıkış / donanım nefes alma adımları sırayla işlenir.
-3. Bu sıra **`P3`**, **`P4`**... şeklinde kademeli olarak devam edecektir.
-
-> **Agent Davranışı:** Bir proje bittiğinde Agent, sıradaki proje önerisini daima bu yatay kurala göre sunar. Kullanıcı aksini talep etmediği sürece dikey olarak aynı kartın sonraki seviyesine geçiş önermez.
+1. **İlk Hedef:** **`01_ESP_WROOM_32`** geliştirme kartının başlangıçtan ileri seviyeye (P1'den P12'ye kadar) tüm projeleri resmi **ESP-IDF** ekosistemiyle eksiksiz tamamlanacaktır.
+2. ESP32'nin tüm müfredatı tamamlandıktan sonra sıradaki karta geçilecek, o kartın klasörü açılacak ve projeleri sırayla işlenecektir.
+3. Repoda karmaşıklığı önlemek için aktif olarak çalışılmayan kart klasörleri ana dizinde açılmayacak; odaklanılan kart tekil ve temiz bir şekilde geliştirilecektir.
 
 ---
 
