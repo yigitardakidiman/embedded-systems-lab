@@ -1,2 +1,0 @@
-# CRIUS ALL IN ONE PRO (ATmega2560)
-
