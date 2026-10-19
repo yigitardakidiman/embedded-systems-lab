@@ -42,13 +42,15 @@ Açılan her proje klasörünün kendi içinde mutlaka şu standart yapıyı kor
 
 ```text
 <proje_klasoru>/
+├── platformio.ini     # PlatformIO donanım ve doğal SDK yapılandırması
 ├── README.md          # Projenin amacı, Pin bağlantı tablosu ve öğrenilen kavramlar
-├── src/               # Kaynak kodlar (.ino, .c, .cpp, .v)
+├── src/               # Kaynak kodlar (main.c, main.h)
 └── media/             # Devrenin çalışma anı fotoğrafı veya kısa GIF kaydı
 ```
 
+* **`platformio.ini`:** Kartın çip, platform ve doğal framework ayarlarını (`framework = espidf`, `framework = stm32cube`, `framework = baremetal`) içerir.
 * **`README.md` (En Son Doldurulur):** Proje başında veya geliştirme esnasında doldurulmaz. Kod yazılıp, devre test edilip proje **tamamen bittikten sonra en son aşamada** doldurulacaktır. Projenin amacını, kullanılan donanım listesini, gerçek pin bağlantı tablosunu, nihai kodları ve derleme/yükleme komutlarını içerir.
-* **`src/`:** Projeye ait kemik kaynak kodları barındırır (`main.cpp`, `src.ino`).
+* **`src/`:** Projeye ait kemik kaynak kodları barındırır (`main.c`). Asla `.ino` dosyası içermez.
 * **`media/`:** Kullanıcının devre çalıştığında ekleyeceği fotoğraf (`.JPEG`, `.PNG`) ve hareketli görselleri (`.GIF`) barındırır.
 
 ---
@@ -81,11 +83,13 @@ Kullanıcı aksi yönde özel bir talimat vermediği sürece müfredat **yatay (
 
 Her kart, kendi mikrodenetleyici üreticisinin resmi doğal kütüphaneleri, SDK'sı veya doğrudan bare-metal (register) seviyesinde programlanacaktır. Asla `Arduino.h` dahil edilmeyecektir.
 
+Tüm projelerin derleme ve yükleme süreçleri VS Code içinde **PlatformIO IDE** üzerinden yönetilecek; PlatformIO yalnızca bir inşa yöneticisi (build manager) olarak üreticilerin resmi SDK'larını (`framework = espidf`, `framework = stm32cube`, `framework = baremetal`) çalıştıracaktır.
+
 ---
 
 ### 1. ST NUCLEO Serisi (STM32U575, STM32H723, STM32WB55)
 * **Kütüphane:** Resmi **STM32Cube HAL / LL / CMSIS** (`stm32xxxx_hal.h`, `main.h`).
-* **VS Code Ortamı:** STM32CubeMX ile `CMake` formatında kod üretimi + **STM32 VS Code Extension** veya saf `arm-none-eabi-gcc`.
+* **VS Code Ortamı:** **PlatformIO IDE** (`framework = stm32cube` / `framework = cmsis`) veya STM32CubeMX CMake.
 * **Giriş Noktası & Mantık:** Standart C `int main(void)` ve sonsuz `while (1)` döngüsü.
 * **Temel Kavramlar:** Sistem Saat Ağacı (RCC Clock Tree / PLL), GPIO Saat Kapıları (`__HAL_RCC_GPIOx_CLK_ENABLE()`), `GPIO_InitTypeDef` (Pin modu, hızı, pull-up/pull-down).
 * **Örnek Doğal Kod Yapısı:**
