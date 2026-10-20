@@ -114,3 +114,10 @@ cd 01_ESP_WROOM_32/01_beginner/04_i2c_oled_display
 # 3. Bağımlılığı çekin, derleyin ve karta yükleyin
 idf.py -p COM4 build flash monitor
 ```
+
+---
+
+## 📸 Uygulama Görseli
+
+![0.91" I2C OLED Ekran Çalışma Anı](media/hello_world.JPEG)
+
