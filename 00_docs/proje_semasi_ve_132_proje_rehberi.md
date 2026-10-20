@@ -57,7 +57,7 @@ Laboratuvarda **Dikey (Kart Bazlı) İlerleme Modeli** izlenmektedir. İlk olara
 
 | # | Geliştirme Kartı | P1 (Blink) | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10 | P11 | P12 |
 | :-: | :--- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| **01** | **ESP-WROOM-32** | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **01** | **ESP-WROOM-32** | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **02** | **Raspberry Pi Pico 2 W** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **03** | **CRIUS ALL IN ONE PRO** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **04** | **TI MSP-EXP430G2** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
@@ -120,25 +120,25 @@ Laboratuvarda **Dikey (Kart Bazlı) İlerleme Modeli** izlenmektedir. İlk olara
 4. **`04_i2c_oled_display`** — **I2C 0.91" OLED Ekran ile Metin ve Sayaç Göstergesi (`0.91" OLED - SSD1306`)** **[TAMAMLANDI ✅]**
    - *Kavram:* 2 telli I2C haberleşme protokolü (`SDA`, `SCL`) ile tanışma; ESP-IDF modern I2C Master sürücüsü (`driver/i2c_master.h`) üzerinden SSD1306 OLED denetleyicisini başlatma, sayfa adresleme moduyla ekrana başlık, çalışma sayacı (Uptime) ve dinamik metinler yazdırma.
 
-#### 🟡 Orta Seviye (`02_intermediate/`)
-5. **`05_dual_barometer_ips_trend`** — **Çift Sensörlü Barometrik Hava İstasyonu ve Trend Analizi (`GY-BMP280`, `BMP180`, `0.96" IPS Ekran`)**
-   - *Kavram:* I2C hattında iki farklı nesil basınç sensörünü (`BMP180` ve `GY-BMP280`) aynı anda çalıştırıp ölçüm farklarını/gürültülerini karşılaştırma ve SPI `0.96" RGB IPS` ekranda son 1 saatin basınç grafiğini çizdirme.
-6. **`06_web_and_manual_motor_control`** — **Web Tabanlı ve Manuel (El/Otomatik) Motor Hız Kontrol Paneli (`Motor Sürücüsü`, `HW-070`, `HW-131`, `0.91" OLED`)**
-   - *Kavram:* Endüstriyel **Auto / Manual** kontrol mantığı: Manuel modda hız referansını `HW-070` potansiyometresinin PWM çıkışından okuma, Otomatik modda ise ESP32 asenkron WebSocket arayüzünden gelen komutlarla `MCPWM` modülünü sürme.
-7. **`07_mlx90614_ble_thermal_monitor`** — **MOSFET Güç Katı Termal Monitörü ve BLE Sağlık/Telemetri Servisi (`MLX90614`, `HW-070`, `0.96" IPS Ekran`)**
-   - *Kavram:* `HW-070` yüksek akımda yük sürerken üzerindeki güç MOSFET'inin sıcaklığını `MLX90614` kızılötesi sensörle temassız izleyip, standart Bluetooth Low Energy **GATT Servisi** üzerinden telefona aşırı ısınma bildirimi (Notification) gönderme.
-8. **`08_lipo_deep_sleep_weather_node`** — **LiPo Batarya Monitörü ve Derin Uyku (Deep Sleep) Hava Düğümü (`LiPo Şarj Entegresi`, `100kΩ Dirençler`, `GY-BMP280`, `DHT11`)**
-   - *Kavram:* LiPo pil voltajını `100kΩ - 100kΩ` gerilim bölücü ve ADC ile takip etme, her 10 dakikada bir RTC Timer ile Deep Sleep'ten uyanıp `GY-BMP280` ve `DHT11` verilerini RTC belleğe kaydetme ve sadece saatte bir Wi-Fi açarak toplu gönderim yapma.
+#### 🟡 Orta Seviye (`02_intermediate/`) — Tekil Sensör, ADC ve SPI Temelleri
+5. **`05_i2c_bmp280_oled_thermometer`** — **I2C Sensör Okuma ve OLED Dijital Termometre/Barometre (`GY-BMP280` veya `BMP180`, `0.91" OLED`)** **[TAMAMLANDI ✅]**
+   - *Kavram:* P4'te kurulan I2C hattına (`SDA/SCL`) ikinci bir cihaz olarak basınç/sıcaklık sensörünü paralel bağlama; aynı I2C veri yolu üzerinden gerçek sıcaklık (`°C`) ve basınç (`hPa`) verisini okuyup `snprintf` ile `0.91" OLED` ekrana canlı yazdırma.
+6. **`06_ultrasonic_distance_oled_meter`** — **Ultrasonik Mesafe Ölçer ve Yakınlık Göstergesi (`HC-SR04`, `1kΩ/2kΩ Direnç`, `0.91" OLED`)**
+   - *Kavram:* `HC-SR04` sensörüne `10 µs` tetik (`Trig`) darbesi gönderip `Echo` dönüş süresini donanımsal zamanlayıcı (`esp_timer_get_time()`) ile mikrosaniye hassasiyetinde ölçme (`1kΩ + 2kΩ` gerilim bölücü güvenliğiyle) ve mesafeyi (`cm`) OLED ekranda gösterme.
+7. **`07_adc_microphone_vu_meter`** — **ESP32 ADC ile Analog Ses Seviyesi (VU Meter) Ölçümü (`MAX4466` Mikrofon Amfisi, `0.91" OLED` / LED)**
+   - *Kavram:* ESP32'nin 12-bit **ADC (`esp_adc/adc_oneshot.h`)** birimini yapılandırarak `MAX4466` mikrofon amfisinden analog voltaj/ses genliğini okuma ve ses şiddetini ekranda veya LED'de dinamik seviye çubuğu (VU Meter) olarak gösterme.
+8. **`08_spi_ips_color_display`** — **Yüksek Hızlı SPI Protokolü ve 0.96" Renkli IPS Ekran Sürüşü (`0.96" 80x160 RGB IPS Ekran - ST7735`)**
+   - *Kavram:* Yanına ek sensör karıştırmadan, 4 telli yüksek hızlı **SPI (`MOSI`, `SCLK`, `CS`, `DC`, `RST`)** protokolü ile tanışma; `80x160` RGB565 renkli IPS ekranda temel geometrik şekiller, renk kutuları ve metinler çizdirme.
 
-#### 🔴 İleri Seviye (`03_advanced/`)
-9. **`09_dual_core_fft_spectrum_analyzer`** — **Çift Çekirdekli (Dual-Core) FreeRTOS Ses Spektrum Analizörü (`MAX4466`, `0.96" IPS Ekran`)**
-   - *Kavram:* **Core 0**'da I2S/ADC DMA ile kesintisiz ses örnekleme ve 256-nokta FFT (Fast Fourier Transform) hesabı yaparken, FreeRTOS `Queue` kullanarak **Core 1**'de SPI DMA ile `0.96" RGB` ekranda 60 FPS renkli frekans spektrumu çizdirme.
-10. **`10_mpu6050_flight_simulator_cockpit`** — **Tam Donanımlı Breadboard Uçuş Simülatörü ve Kokpiti (`MPU6050`, `0.96" IPS Ekran`, `0.91" OLED`, `HW-070 Gaz Kolu`, `Kanat/Stall LED'leri`)**
-    - *Kavram:* Tüm bileşenleri tek bir breadboard üzerine yerleştirerek breadboard'u elde tutulan bir **uçak kokpiti / lövyesine** dönüştürme: `MPU6050` ile Pitch (Yunuslama) ve Roll (Yatış) açılarını hesaplama, `HW-070` potansiyometresini **Gaz Kolu (Throttle)** olarak okuma, `0.96" RGB IPS` ekranda canlı **Yapay Ufuk (Artificial Horizon / HUD)** çizdirme, `0.91" OLED` ekranda irtifa/hız verilerini gösterme, aşırı açıda (`>45°`) **Stall Uyarı LED'lerini** yakma ve aynı anda PC ekranındaki **3B WebGL/Three.js Uçuş Simülatöründe** uçağı gerçek zamanlı uçurma.
-11. **`11_acoustic_and_tilt_safe_motor`** — **Eğim Korumalı ve Ses Komutlu Akıllı Motor Kontrolcüsü (`MPU6050`, `Mikrofon Modülü`, `MAX4466`, `Motor Sürücüsü`, `0.91" OLED`)**
-    - *Kavram:* Ses modülü ile çift alkış / frekans tespitiyle motoru başlatıp durdurma; `MPU6050`'nin donanımsal kesmesi (`INT`) ile sarsıntı veya aşırı eğim algılandığında FreeRTOS yüksek öncelikli görevle acil duruş (Emergency Stop) yapma.
-12. **`12_mqtt_bridge_and_ota_hub`** — **MQTT Köprüsü ve OTA (Kablosuz Yazılım Güncelleme) Destekli Sensör Merkezi (`MLX90614`, `GY-BMP280`, `0.96" IPS Ekran`)**
-    - *Kavram:* TLS şifreli MQTT istemcisi, NVS (Non-Volatile Storage) üzerinde Wi-Fi ayarlarını saklama, Watchdog Timer koruması ve çift partition üzerinden uzaktan güvenli **OTA Firmware Update** mimarisi kurma.
+#### 🔴 İleri Seviye (`03_advanced/`) — IMU, Motor Kontrol, Wi-Fi ve BLE
+9. **`09_mpu6050_imu_spirit_level`** — **MPU6050 İvmeölçer/Jiroskop ile Dijital Su Terazisi ve Eğim Ölçer (`MPU6050`, `0.96" IPS Ekran` veya `0.91" OLED`)**
+   - *Kavram:* 6 eksenli `MPU6050` IMU sensöründen I2C ile ham ivme/jiroskop verilerini okuma, `atan2` ile Pitch (Yunuslama) ve Roll (Yatış) açılarını hesaplama ve ekranda canlı su terazisi / eğim göstergesi çizdirme.
+10. **`10_motor_driver_pwm_speed_control`** — **Harici Güç İzolasyonlu DC Motor Hız ve Yön Kontrolü (`Motor Sürücüsü`, `HW-070`, `HW-131 Breadboard Güç`, `0.91" OLED`)**
+    - *Kavram:* `HW-131` ile güç hattını izole etme, `HW-070` kontrolcüsünden hız referansı alıp `Motor Sürücüsü` ve donanımsal PWM üzerinden DC motorun hızını ve yönünü güvenli şekilde sürme.
+11. **`11_wifi_webserver_sensor_dashboard`** — **Wi-Fi İstasyon Modu ve Canlı Web Sensör Paneli (`GY-BMP280` / `DHT11`, `0.91" OLED`)**
+    - *Kavram:* ESP32'yi yerel Wi-Fi ağına bağlama (`esp_wifi` & `esp_http_server`), dahili HTTP web sunucusu üzerinden sensör verilerini tarayıcıda canlı görüntüleme ve web arayüzünden kart üzerindeki çıkışı kontrol etme.
+12. **`12_ble_thermal_telemetry_monitor`** — **Bluetooth Low Energy (BLE) GATT Telemetri ve Kızılötesi Sıcaklık Monitörü (`MLX90614`, `0.96" IPS Ekran`)**
+    - *Kavram:* `MLX90614` temassız kızılötesi termometre sensörüyle yüzey sıcaklığını ölçüp ESP32'nin **BLE GATT** servisi üzerinden cep telefonuna kablosuz bildirim (`Notification`) gönderme.
 
 ---
 
