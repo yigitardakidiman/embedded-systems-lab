@@ -8,9 +8,11 @@ Projede kademeli olarak iki aşama tamamlanmıştır:
 
 ---
 
-## 📸 Devre ve Çalışma Görseli
+## 📸 Uygulama Görselleri
 
-![Devre Kurulumu](media/circuit.jpg)
+| Aşama 1 & 2: LED Blink ve BOOT Butonu Devresi (`delay.JPEG`) |
+| :---: |
+| ![ESP32 LED Blink ve BOOT Buton Devresi](media/delay.JPEG) |
 
 ---
 
