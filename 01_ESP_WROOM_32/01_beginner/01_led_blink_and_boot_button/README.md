@@ -8,14 +8,6 @@ Projede kademeli olarak iki aşama tamamlanmıştır:
 
 ---
 
-## 📸 Uygulama Görselleri
-
-| Aşama 1 & 2: LED Blink ve BOOT Butonu Devresi (`delay.JPEG`) |
-| :---: |
-| ![ESP32 LED Blink ve BOOT Buton Devresi](media/delay.JPEG) |
-
----
-
 ## 🛠️ Donanım Gereksinimleri
 
 * 1 × **ESP-WROOM-32** Geliştirme Kartı (Dual-Core Xtensa @ 240 MHz)
@@ -128,3 +120,11 @@ Proje dizininde terminalden şu komut çalıştırılarak doğrudan inşa edilir
 ```powershell
 idf.py -p COM4 build flash
 ```
+
+---
+
+## 📸 Uygulama Görselleri
+
+| Aşama 1 & 2: LED Blink ve BOOT Butonu Devresi (`delay.JPEG`) |
+| :---: |
+| ![ESP32 LED Blink ve BOOT Buton Devresi](media/delay.JPEG) |
