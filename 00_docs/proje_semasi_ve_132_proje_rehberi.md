@@ -57,7 +57,7 @@ Laboratuvarda **Dikey (Kart Bazlı) İlerleme Modeli** izlenmektedir. İlk olara
 
 | # | Geliştirme Kartı | P1 (Blink) | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10 | P11 | P12 |
 | :-: | :--- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| **01** | **ESP-WROOM-32** | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **01** | **ESP-WROOM-32** | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **02** | **Raspberry Pi Pico 2 W** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **03** | **CRIUS ALL IN ONE PRO** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **04** | **TI MSP-EXP430G2** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
@@ -113,7 +113,7 @@ Laboratuvarda **Dikey (Kart Bazlı) İlerleme Modeli** izlenmektedir. İlk olara
 #### 🟢 Başlangıç Seviyesi (`01_beginner/`) — Temel Yapı Taşları
 1. **`01_led_blink_and_boot_button`** — **Blink & Toolchain Doğrulaması (Harici LED & BOOT Butonu)** **[TAMAMLANDI ✅]**
    - *Kavram:* Doğal ESP-IDF v6.1 (C / FreeRTOS) mimarisi, `driver/gpio.h` ile dijital çıkış (`GPIO_MODE_OUTPUT`), dahili pull-up (`GPIO_PULLUP_ONLY`) ile Active-Low `BOOT` butonunu okuma, `vTaskDelay` ile TWDT yönetimi ve `idf.py` inşa/yükleme hattını doğrulama.
-2. **`02_capacitive_touch_led_bar`** — **Dahili Kapasitif Dokunmatik Sensör ve Gösterge LED'i (`T0 / GPIO 4`, Harici Mavi LED)**
+2. **`02_capacitive_touch_led_bar`** — **Dahili Kapasitif Dokunmatik Sensör ve Gösterge LED'i (`T9 / GPIO 32`, Harici LED)** **[TAMAMLANDI ✅]**
    - *Kavram:* ESP32'nin dahili kapasitif algılayıcısını (`touchRead()`) tanıma, parmak temasıyla kapasitans değişimini algılayıp dinamik eşik kalibrasyonuyla LED kontrolü sağlama.
 3. **`03_ledc_pwm_breathe_led`** — **LEDC Donanım PWM ile LED Parlaklık ve Nefes Alma Efekti (`GPIO 16/25`, Renkli LED)**
    - *Kavram:* `delay()` ile işlemciyi kitlemeden donanımsal `ledc` modülü ile PWM sinyali üretme; LED parlaklığını kademeli artırıp azaltarak (Fade/Breathe) analog çıkış mantığını kavrama.
