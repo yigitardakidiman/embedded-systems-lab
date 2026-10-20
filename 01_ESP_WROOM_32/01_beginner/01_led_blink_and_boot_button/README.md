@@ -128,3 +128,4 @@ idf.py -p COM4 build flash
 | Aşama 1 & 2: LED Blink ve BOOT Butonu Devresi (`delay.JPEG`) |
 | :---: |
 | ![ESP32 LED Blink ve BOOT Buton Devresi](media/delay.JPEG) |
+
