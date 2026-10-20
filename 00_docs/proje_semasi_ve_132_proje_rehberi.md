@@ -22,8 +22,8 @@ embedded-systems-lab/
 │   ├── 01_beginner/
 │   │   ├── 01_led_blink_and_boot_button/
 │   │   ├── 02_capacitive_touch_led_bar/
-│   │   ├── 03_dht11_single_wire_oled/
-│   │   └── 04_max4466_adc_vu_meter/
+│   │   ├── 03_ledc_pwm_breathe_led/
+│   │   └── 04_i2c_oled_display/
 │   ├── 02_intermediate/               # 05..08 arası projeler
 │   └── 03_advanced/                   # 09..12 arası projeler
 │
@@ -57,7 +57,7 @@ Laboratuvarda **Dikey (Kart Bazlı) İlerleme Modeli** izlenmektedir. İlk olara
 
 | # | Geliştirme Kartı | P1 (Blink) | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10 | P11 | P12 |
 | :-: | :--- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| **01** | **ESP-WROOM-32** | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **01** | **ESP-WROOM-32** | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **02** | **Raspberry Pi Pico 2 W** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **03** | **CRIUS ALL IN ONE PRO** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **04** | **TI MSP-EXP430G2** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
@@ -100,7 +100,7 @@ Laboratuvarda **Dikey (Kart Bazlı) İlerleme Modeli** izlenmektedir. İlk olara
 > 1. **P1 — Dijital Giriş/Çıkış (GPIO & Buton):** LED yakıp söndürme, pull-up direnci ve buton okuma.
 > 2. **P2 — Analog Çıkış / PWM (LED Karartma - Fade/Breathe):** Donanımsal PWM modülü ile tek bir LED'in parlaklığını yumuşakça kısıp açma (motor veya harici sürücü olmadan).
 > 3. **P3 — Analog Giriş / ADC (Potansiyometre veya Tek Sensör):** Dahili ADC ile analog voltaj okuma ve Serial Monitor'de görme.
-> 4. **P4 — Temel İletişim & Ekran (I2C & 0.91" OLED):** 2 kablolu I2C protokolü ile OLED ekrana yazı ve okunan sensör verisini yazdırma.
+> 4. **P4 — Temel İletişim & Ekran (I2C & 0.91" OLED):** 2 telli donanımsal I2C protokolü ile 0.91" SSD1306 OLED ekrana dinamik metin, sayaç ve durum bilgisi yazdırma.
 >
 > ⚠️ **Karmaşık Bileşenler Nerede?**
 > Motor sürücüleri, HW-070 harici güç kontrolü, HC-SR04 zamanlama analizi, çift sensör füzyonu ve kesmeler **Orta Seviye (02_intermediate)** ve **İleri Seviye (03_advanced)** aşamalarında, temeller sağlam oturduktan sonra devreye girecektir.
@@ -117,8 +117,8 @@ Laboratuvarda **Dikey (Kart Bazlı) İlerleme Modeli** izlenmektedir. İlk olara
    - *Kavram:* ESP32'nin dahili kapasitif algılayıcısını (`touchRead()`) tanıma, parmak temasıyla kapasitans değişimini algılayıp dinamik eşik kalibrasyonuyla LED kontrolü sağlama.
 3. **`03_ledc_pwm_breathe_led`** — **LEDC Donanım PWM ile LED Parlaklık ve Nefes Alma Efekti (`GPIO 25`, Harici LED)** **[TAMAMLANDI ✅]**
    - *Kavram:* `delay()` ile işlemciyi kitlemeden donanımsal `ledc` modülü ile PWM sinyali üretme; LED parlaklığını kademeli artırıp azaltarak (Fade/Breathe) analog çıkış mantığını kavrama.
-4. **`04_i2c_oled_climate_display`** — **I2C 0.91" OLED Ekran ve DHT11 Sıcaklık/Nem Göstergesi (`0.91" OLED`, `DHT11`)**
-   - *Kavram:* 2 telli I2C haberleşme protokolü (`SDA`, `SCL`) ile tanışma; hazır kütüphane yardımıyla ekrana metin ve `DHT11` sensöründen okunan sıcaklık/nem değerlerini yazdırma.
+4. **`04_i2c_oled_display`** — **I2C 0.91" OLED Ekran ile Metin ve Sayaç Göstergesi (`0.91" OLED - SSD1306`)** **[TAMAMLANDI ✅]**
+   - *Kavram:* 2 telli I2C haberleşme protokolü (`SDA`, `SCL`) ile tanışma; ESP-IDF modern I2C Master sürücüsü (`driver/i2c_master.h`) üzerinden SSD1306 OLED denetleyicisini başlatma, sayfa adresleme moduyla ekrana başlık, çalışma sayacı (Uptime) ve dinamik metinler yazdırma.
 
 #### 🟡 Orta Seviye (`02_intermediate/`)
 5. **`05_dual_barometer_ips_trend`** — **Çift Sensörlü Barometrik Hava İstasyonu ve Trend Analizi (`GY-BMP280`, `BMP180`, `0.96" IPS Ekran`)**

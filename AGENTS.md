@@ -20,11 +20,10 @@ Kullanıcı gömülü sistemleri uygulamalı olarak öğrenmektedir. Kodun tamam
 Bir projeye veya yeni bir dosyaya başlarken Agent **SADECE** en asgari iskelet (kemik) yapıyı oluşturur:
 
 1. **Gerekli Kütüphaneler:** Yalnızca karta ve çevre birime özel doğal `#include` satırları (örn. `stm32u5xx_hal.h`, `pico/stdlib.h`, `avr/io.h`, `driver/gpio.h`).
-2. **Pin Tanımlamaları KULLANICIYA AİTTİR:** Agent pin numaralarını veya register maskelerini doğrudan yazmaz. Yalnızca nereye yazılacağını gösteren `// TODO: Pin tanımlamalarını yap` yorumunu bırakır.
-3. **Boş Fonksiyon İskeletleri:**
-   - Standart C giriş noktası (`int main(void) { // TODO: Saat ve pin ayarları; while(1) { // TODO: Algoritma } }`)
-   - ESP-IDF projelerinde `void app_main(void)`
-   - Varsa özel fonksiyon veya kesme (ISR) fonksiyonlarının sadece boş imzaları.
+2. **Pin Tanımlamaları KULLANICIYA AİTTİR:** Agent pin numaralarını, register maskelerini veya `// TODO` gibi herhangi bir yorum satırını kesinlikle yazmaz.
+3. **Sadece Ana Giriş Fonksiyonu:**
+   - Yalnızca içi tamamen boş ana fonksiyon oluşturulur (Standart C için `int main(void) {}`, ESP-IDF projeleri için `void app_main(void) {}`).
+   - Fonksiyon içerisine veya dışına `// TODO` yorumları, `while(1)` döngüsü ya da başka yardımcı/kesme (ISR) fonksiyon iskeletleri kesinlikle eklenmez.
 
 ---
 
