@@ -57,7 +57,7 @@ Laboratuvarda **Dikey (Kart Bazlı) İlerleme Modeli** izlenmektedir. İlk olara
 
 | # | Geliştirme Kartı | P1 (Blink) | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10 | P11 | P12 |
 | :-: | :--- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| **01** | **ESP-WROOM-32** | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **01** | **ESP-WROOM-32** | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **02** | **Raspberry Pi Pico 2 W** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **03** | **CRIUS ALL IN ONE PRO** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **04** | **TI MSP-EXP430G2** | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
@@ -123,8 +123,8 @@ Laboratuvarda **Dikey (Kart Bazlı) İlerleme Modeli** izlenmektedir. İlk olara
 #### 🟡 Orta Seviye (`02_intermediate/`) — Tekil Sensör, ADC ve SPI Temelleri
 5. **`05_i2c_bmp280_oled_thermometer`** — **I2C Sensör Okuma ve OLED Dijital Termometre/Barometre (`GY-BMP280` veya `BMP180`, `0.91" OLED`)** **[TAMAMLANDI ✅]**
    - *Kavram:* P4'te kurulan I2C hattına (`SDA/SCL`) ikinci bir cihaz olarak basınç/sıcaklık sensörünü paralel bağlama; aynı I2C veri yolu üzerinden gerçek sıcaklık (`°C`) ve basınç (`hPa`) verisini okuyup `snprintf` ile `0.91" OLED` ekrana canlı yazdırma.
-6. **`06_ultrasonic_distance_oled_meter`** — **Ultrasonik Mesafe Ölçer ve Yakınlık Göstergesi (`HC-SR04`, `1kΩ/2kΩ Direnç`, `0.91" OLED`)**
-   - *Kavram:* `HC-SR04` sensörüne `10 µs` tetik (`Trig`) darbesi gönderip `Echo` dönüş süresini donanımsal zamanlayıcı (`esp_timer_get_time()`) ile mikrosaniye hassasiyetinde ölçme (`1kΩ + 2kΩ` gerilim bölücü güvenliğiyle) ve mesafeyi (`cm`) OLED ekranda gösterme.
+6. **`06_touch_led_oled_monitor`** — **Kapasitif Dokunmatik Sensör, LED ve Canlı OLED Gösterge Paneli (`T9 / GPIO 32`, `GPIO 25` LED, `0.91" OLED`)** **[TAMAMLANDI ✅]**
+   - *Kavram:* ESP32'nin dahili kapasitif dokunmatik sensöründen (`TOUCH_PAD_NUM9`) okunan anlık kapasitans değerini ve temas durumunu (`DOKUNULDU` / `BOSTA`) eşzamanlı olarak hem harici LED üzerinde hem de `0.91" I2C OLED` ekranda canlı gösterme.
 7. **`07_adc_microphone_vu_meter`** — **ESP32 ADC ile Analog Ses Seviyesi (VU Meter) Ölçümü (`MAX4466` Mikrofon Amfisi, `0.91" OLED` / LED)**
    - *Kavram:* ESP32'nin 12-bit **ADC (`esp_adc/adc_oneshot.h`)** birimini yapılandırarak `MAX4466` mikrofon amfisinden analog voltaj/ses genliğini okuma ve ses şiddetini ekranda veya LED'de dinamik seviye çubuğu (VU Meter) olarak gösterme.
 8. **`08_spi_ips_color_display`** — **Yüksek Hızlı SPI Protokolü ve 0.96" Renkli IPS Ekran Sürüşü (`0.96" 80x160 RGB IPS Ekran - ST7735`)**

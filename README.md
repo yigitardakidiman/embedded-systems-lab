@@ -20,7 +20,7 @@ Laboratuvarda **Dikey (Kart Bazlı) İlerleme Modeli** izlenmektedir. İlk olara
 
 | # | Geliştirme Kartı | Mimari / Çekirdek | P1 (Blink) | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10 | P11 | P12 |
 | :-: | :--- | :--- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| **01** | **ESP-WROOM-32** | Dual Xtensa LX6 (240 MHz, Wi-Fi/BLE) | [✅](01_ESP_WROOM_32/01_beginner/01_led_blink_and_boot_button/) | [✅](01_ESP_WROOM_32/01_beginner/02_capacitive_touch_led_bar/) | [✅](01_ESP_WROOM_32/01_beginner/03_ledc_pwm_breathe_led/) | [✅](01_ESP_WROOM_32/01_beginner/04_i2c_oled_display/) | [✅](01_ESP_WROOM_32/02_intermediate/05_i2c_bmp280_oled_thermometer/) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **01** | **ESP-WROOM-32** | Dual Xtensa LX6 (240 MHz, Wi-Fi/BLE) | [✅](01_ESP_WROOM_32/01_beginner/01_led_blink_and_boot_button/) | [✅](01_ESP_WROOM_32/01_beginner/02_capacitive_touch_led_bar/) | [✅](01_ESP_WROOM_32/01_beginner/03_ledc_pwm_breathe_led/) | [✅](01_ESP_WROOM_32/01_beginner/04_i2c_oled_display/) | [✅](01_ESP_WROOM_32/02_intermediate/05_i2c_bmp280_oled_thermometer/) | [✅](01_ESP_WROOM_32/02_intermediate/06_touch_led_oled_monitor/) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **02** | **Raspberry Pi Pico 2 W** | RP2350 (Dual Cortex-M33 / RISC-V + PIO) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **03** | **CRIUS ALL IN ONE PRO** | 8-Bit AVR ATmega2560 (Flight Controller) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **04** | **TI MSP-EXP430G2** | 16-Bit Ultra-Low-Power RISC (512B RAM) | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
